@@ -1,269 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Gallery — Sun Seekers Travels. Browse stunning Kashmir travel photos — Dal Lake, Gulmarg, Pahalgam, Sonmarg, and our premium vehicle fleet.">
-<title>Gallery | Sun Seekers Travels – Kashmir in Pictures</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kashmir gallery — Sun Seekers Travels. All photos managed live from admin panel.">
+<title>Gallery | Sun Seekers Travels</title>
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
 <style>
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:2000;align-items:center;justify-content:center;padding:20px}
 .lightbox.open{display:flex}
 .lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px}
-.lightbox-close{position:absolute;top:20px;right:24px;font-size:2rem;color:var(--gold);cursor:pointer;background:none;border:none;font-family:inherit;line-height:1;transition:var(--transition)}
+.lightbox-close{position:absolute;top:20px;right:24px;font-size:2rem;color:var(--gold);cursor:pointer;background:none;border:none;font-family:inherit;line-height:1}
 .lightbox-close:hover{transform:scale(1.2)}
 .lightbox-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);white-space:nowrap}
 </style>
 </head>
 <body>
-
-<!-- NAVBAR -->
 <nav class="navbar scrolled" id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">☀️</div>
-      <div class="nav-logo-text">
-        <span class="nav-logo-name">Sun Seekers</span>
-        <span class="nav-logo-sub">Travels · Srinagar</span>
-      </div>
-    </a>
+    <a href="index.html" class="nav-logo"><div class="nav-logo-icon">☀️</div><div class="nav-logo-text"><span class="nav-logo-name">Sun Seekers</span><span class="nav-logo-sub">Travels · Srinagar</span></div></a>
     <div class="nav-links">
       <a href="index.html">Home</a><a href="about.html">About</a><a href="fleet.html">Fleet</a>
-      <a href="services.html">Services</a><a href="gallery.html" class="active">Gallery</a><a href="contact.html">Contact</a>
+      <a href="services.html">Services</a><a href="packages.html">Packages</a>
+      <a href="gallery.html" class="active">Gallery</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
     </div>
-    <div class="nav-cta">
-      <a href="tel:+916005868858" class="btn btn-outline">📞 Call Now</a>
-      <a href="contact.html" class="btn btn-gold">Book Now</a>
-    </div>
+    <div class="nav-cta"><a href="tel:+916005868858" class="btn btn-outline">📞 Call Now</a><a href="contact.html" class="btn btn-gold">Book Now</a></div>
     <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-nav">
   <a href="index.html">Home</a><a href="about.html">About Us</a><a href="fleet.html">Our Fleet</a>
-  <a href="services.html">Services</a><a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+  <a href="services.html">Services</a><a href="packages.html">Packages</a>
+  <a href="gallery.html">Gallery</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
   <div class="mobile-btns">
     <a href="tel:+916005868858" class="btn btn-outline">📞 +91 6005868858</a>
     <a href="https://wa.me/916005868858" class="btn btn-whatsapp">💬 WhatsApp Us</a>
     <a href="contact.html" class="btn btn-gold">✈️ Book a Trip</a>
   </div>
 </div>
-
-<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1600&q=85')"></div>
   <div class="page-hero-overlay"></div>
   <div class="container page-hero-content">
     <div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> Gallery</div>
-    <div class="tag">Visual Kashmir</div>
+    <div class="tag">Live from Firebase</div>
     <h1 class="section-title" style="font-size:clamp(2.2rem,5vw,3.8rem)">Kashmir Through Our Lens</h1>
     <div class="divider"></div>
-    <p style="color:var(--text-light);max-width:560px;font-size:1.05rem;line-height:1.8;font-weight:300">
-      A glimpse into the breathtaking journeys we craft — from misty valleys to golden meadows, and every road in between.
-    </p>
+    <p style="color:var(--text-light);max-width:560px;font-size:1.05rem;line-height:1.8;font-weight:300">All photos managed from the admin panel. Add or remove images anytime — updates appear here instantly.</p>
   </div>
 </section>
-
-<!-- FILTER TABS -->
-<div style="background:var(--navy-mid);border-bottom:1px solid var(--border);padding:20px 0">
+<div style="background:var(--navy-mid);border-bottom:1px solid var(--border);padding:18px 0">
   <div class="container" style="display:flex;gap:10px;flex-wrap:wrap">
-    <button class="filter-btn btn btn-gold" data-filter="all" style="padding:10px 20px;font-size:11px">All Photos</button>
-    <button class="filter-btn btn btn-outline" data-filter="landscapes" style="padding:10px 20px;font-size:11px">🏔️ Landscapes</button>
-    <button class="filter-btn btn btn-outline" data-filter="destinations" style="padding:10px 20px;font-size:11px">📍 Destinations</button>
-    <button class="filter-btn btn btn-outline" data-filter="travel" style="padding:10px 20px;font-size:11px">🚗 Travel Moments</button>
-    <button class="filter-btn btn btn-outline" data-filter="seasons" style="padding:10px 20px;font-size:11px">🌸 Seasons</button>
+    <button class="gal-filter btn btn-gold" data-cat="all" style="padding:10px 18px;font-size:11px">All Photos</button>
+    <button class="gal-filter btn btn-outline" data-cat="landscapes" style="padding:10px 18px;font-size:11px">🏔️ Landscapes</button>
+    <button class="gal-filter btn btn-outline" data-cat="destinations" style="padding:10px 18px;font-size:11px">📍 Destinations</button>
+    <button class="gal-filter btn btn-outline" data-cat="travel" style="padding:10px 18px;font-size:11px">🚗 Travel</button>
+    <button class="gal-filter btn btn-outline" data-cat="seasons" style="padding:10px 18px;font-size:11px">🌸 Seasons</button>
   </div>
 </div>
-
-<!-- GALLERY -->
 <section class="section-pad">
   <div class="container">
-    <div id="galleryGrid" class="gallery-grid">
-
-      <div class="gallery-item tall reveal" data-cat="landscapes" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=85" alt="Kashmir Peaks" loading="lazy" data-caption="Kashmir Mountain Peaks">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Kashmir Peaks</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-1" data-cat="destinations" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=700&q=85" alt="Dal Lake" loading="lazy" data-caption="Dal Lake, Srinagar">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Dal Lake</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-2" data-cat="destinations" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=700&q=85" alt="Gulmarg Winter" loading="lazy" data-caption="Gulmarg in Winter">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Gulmarg</span></div>
-      </div>
-
-      <div class="gallery-item wide reveal" data-cat="landscapes" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1585506942812-e72b29cef752?w=1000&q=85" alt="Kashmir Valley" loading="lazy" data-caption="Kashmir Valley Panorama">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Valley Panorama</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-1" data-cat="seasons" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=700&q=85" alt="Winter Kashmir" loading="lazy" data-caption="Winter Wonderland — Kashmir">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Winter Wonderland</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-2" data-cat="destinations" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=85" alt="Sonmarg Glacier" loading="lazy" data-caption="Sonmarg — Meadow of Gold">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Sonmarg</span></div>
-      </div>
-
-      <div class="gallery-item tall reveal" data-cat="landscapes" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1599586120429-48281b6f0ece?w=800&q=85" alt="Mountain Road" loading="lazy" data-caption="Roads Through the Mountains">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Mountain Roads</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-1" data-cat="travel" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=700&q=85" alt="Travel Journey" loading="lazy" data-caption="On the Road in Kashmir">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Road Journeys</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-2" data-cat="seasons" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?w=700&q=85" alt="Autumn Kashmir" loading="lazy" data-caption="Autumn Chinar Trees — Kashmir">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Autumn Chinars</span></div>
-      </div>
-
-      <div class="gallery-item wide reveal" data-cat="destinations" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=1000&q=85" alt="Pahalgam Valley" loading="lazy" data-caption="Pahalgam — Valley of Shepherds">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Pahalgam Valley</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-1" data-cat="landscapes" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=700&q=85" alt="Snow Mountains" loading="lazy" data-caption="Snow-Capped Peaks">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Snow Peaks</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-2" data-cat="seasons" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1559825481-12a05cc00344?w=700&q=85" alt="Spring Flowers" loading="lazy" data-caption="Spring in Kashmir — Tulip Season">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Tulip Season</span></div>
-      </div>
-
-      <div class="gallery-item reveal" data-cat="travel" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1543746379-e68f5d3f7e8c?w=700&q=85" alt="Group Travel" loading="lazy" data-caption="Group Adventures in Kashmir">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Group Adventures</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-1" data-cat="destinations" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1568377210220-851827f39b2c?w=700&q=85" alt="Mughal Garden" loading="lazy" data-caption="Nishat Bagh — Mughal Gardens">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Mughal Gardens</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-2" data-cat="landscapes" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1574263867128-a3d5c1d1ac5e?w=700&q=85" alt="River Valley" loading="lazy" data-caption="Jhelum River Valley">
-        <div class="gallery-overlay"><span class="gallery-overlay-label">Jhelum Valley</span></div>
-      </div>
-
+    <div class="gallery-grid" id="galPageGrid" style="min-height:300px">
+      <div style="grid-column:1/-1;text-align:center;color:var(--text-mid);padding:60px">Loading gallery from Firebase…</div>
     </div>
   </div>
 </section>
-
-<!-- CTA -->
 <section class="section-pad section-dark" style="text-align:center">
   <div class="container reveal">
     <div class="tag">Your Kashmir Story Awaits</div>
     <h2 class="section-title">Create Your Own Memories</h2>
     <div class="divider center"></div>
-    <p class="section-subtitle">Let Sun Seekers Travels take you to every corner of this magical land. Book today and start your story.</p>
     <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:36px">
       <a href="contact.html" class="btn btn-gold">✈️ Book Your Trip</a>
       <a href="https://wa.me/916005868858" class="btn btn-whatsapp" target="_blank">💬 WhatsApp Us</a>
     </div>
   </div>
 </section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="nav-logo" style="margin-bottom:16px">
-          <div class="nav-logo-icon">☀️</div>
-          <div class="nav-logo-text"><span class="nav-logo-name">Sun Seekers Travels</span><span class="nav-logo-sub">Srinagar, Kashmir</span></div>
-        </div>
-        <p class="footer-desc">Kashmir's trusted travel and vehicle rental partner. Premium fleet, local expertise, and unmatched hospitality for every journey.</p>
-        <div class="social-links">
-          <a href="#" class="social-link">📘</a><a href="#" class="social-link">📸</a>
-          <a href="https://wa.me/916005868858" class="social-link">💬</a>
-          <a href="mailto:sunseekerstravels1@gmail.com" class="social-link">📧</a>
-        </div>
-      </div>
-      <div>
-        <h4 class="footer-heading">Quick Links</h4>
-        <div class="footer-links">
-          <a href="index.html">Home</a><a href="about.html">About Us</a><a href="fleet.html">Our Fleet</a>
-          <a href="services.html">Services</a><a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
-        </div>
-      </div>
-      <div>
-        <h4 class="footer-heading">Services</h4>
-        <div class="footer-links">
-          <a href="services.html">Airport Transfers</a><a href="services.html">Sightseeing Tours</a>
-          <a href="services.html">Outstation Trips</a><a href="services.html">Group Tours</a>
-          <a href="services.html">Corporate Travel</a><a href="services.html">Wedding Transport</a>
-        </div>
-      </div>
-      <div>
-        <h4 class="footer-heading">Contact</h4>
-        <div class="footer-links">
-          <a href="tel:+916005868858">📞 +91 6005868858</a>
-          <a href="tel:+917006567457">📞 +91 7006567457</a>
-          <a href="mailto:sunseekerstravels1@gmail.com">✉️ sunseekerstravels1@gmail.com</a>
-          <a href="contact.html">📍 Zia Complex, Soura, Srinagar</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Sun Seekers Travels. All rights reserved.</span>
-      <span>Designed with ❤️ for Kashmir Tourism</span>
-    </div>
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div><div class="nav-logo" style="margin-bottom:16px"><div class="nav-logo-icon">☀️</div><div class="nav-logo-text"><span class="nav-logo-name">Sun Seekers Travels</span><span class="nav-logo-sub">Srinagar, Kashmir</span></div></div><p class="footer-desc">Kashmir's trusted travel and vehicle rental partner.</p><div class="social-links"><a href="#" class="social-link">📘</a><a href="#" class="social-link">📸</a><a href="https://wa.me/916005868858" class="social-link">💬</a></div></div>
+    <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="fleet.html">Fleet</a><a href="services.html">Services</a><a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div></div>
+    <div><h4 class="footer-heading">Services</h4><div class="footer-links"><a href="services.html">Airport Transfers</a><a href="services.html">Sightseeing Tours</a><a href="services.html">Outstation Trips</a><a href="services.html">Group Tours</a><a href="services.html">Wedding Transport</a></div></div>
+    <div><h4 class="footer-heading">Contact</h4><div class="footer-links"><a href="tel:+916005868858">📞 +91 6005868858</a><a href="tel:+917006567457">📞 +91 7006567457</a><a href="mailto:sunseekerstravels1@gmail.com">✉️ sunseekerstravels1@gmail.com</a><a href="contact.html">📍 Zia Complex, Soura, Srinagar</a></div></div>
   </div>
-</footer>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <button class="lightbox-close" onclick="closeLightbox(null,true)">✕</button>
-  <img id="lightboxImg" src="" alt="">
-  <div class="lightbox-caption" id="lightboxCaption"></div>
+  <div class="footer-bottom"><span>© 2025 Sun Seekers Travels.</span></div>
+</div></footer>
+<div class="lightbox" id="lightbox" onclick="closeLB(event)">
+  <button class="lightbox-close" onclick="closeLB(null,true)">✕</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lightbox-caption" id="lbCap"></div>
 </div>
-
-<a href="https://wa.me/916005868858?text=Hello%20Sun%20Seekers%20Travels!" class="sticky-wa" target="_blank">💬</a>
-<script src="main.js"></script>
+<a href="https://wa.me/916005868858" class="sticky-wa" target="_blank">💬</a>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script><script src="main.js"></script>
 <script>
-// Lightbox
-function openLightbox(el) {
-  const img = el.querySelector('img');
-  document.getElementById('lightboxImg').src = img.src.replace('w=700','w=1200').replace('w=800','w=1200');
-  document.getElementById('lightboxCaption').textContent = img.dataset.caption || '';
+let allPhotos = [];
+(async function() {
+  try { await seedAllDefaultData(); } catch(e) {}
+  try {
+    allPhotos = await getAll('gallery');
+    renderGallery(allPhotos);
+  } catch(e) {
+    document.getElementById('galPageGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-mid)">Firebase not connected. Add credentials to firebase-config.js</div>';
+  }
+})();
+function renderGallery(photos) {
+  const g = document.getElementById('galPageGrid');
+  if (!photos.length) { g.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-mid)">No photos yet. Add from admin panel.</div>'; return; }
+  g.innerHTML = photos.map((p,i) => `
+    <div class="gallery-item${p.tall?' tall':''}${p.wide?' wide':''} reveal" data-cat="${p.category||'landscapes'}" onclick="openLB('${p.image}','${p.label||''}')">
+      <img src="${p.image||''}" alt="${p.label||''}" loading="lazy" onerror="this.parentElement.style.display='none'">
+      <div class="gallery-overlay"><span class="gallery-overlay-label">${p.label||''}</span></div>
+    </div>`).join('');
+  reObserve();
+}
+document.querySelectorAll('.gal-filter').forEach(btn => {
+  btn.onclick = function() {
+    document.querySelectorAll('.gal-filter').forEach(b => { b.classList.remove('btn-gold'); b.classList.add('btn-outline'); });
+    this.classList.add('btn-gold'); this.classList.remove('btn-outline');
+    const cat = this.dataset.cat;
+    const filtered = cat === 'all' ? allPhotos : allPhotos.filter(p => p.category === cat);
+    renderGallery(filtered);
+  };
+});
+function openLB(src, cap) {
+  document.getElementById('lbImg').src = src;
+  document.getElementById('lbCap').textContent = cap;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-function closeLightbox(e, force) {
+function closeLB(e, force) {
   if (force || (e && e.target.id === 'lightbox')) {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
 }
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(null,true); });
-
-// Gallery filter
-const filterBtns = document.querySelectorAll('.filter-btn');
-const items = document.querySelectorAll('.gallery-item');
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => { b.classList.remove('btn-gold'); b.classList.add('btn-outline'); });
-    btn.classList.add('btn-gold'); btn.classList.remove('btn-outline');
-    const filter = btn.dataset.filter;
-    items.forEach(item => {
-      if (filter === 'all' || item.dataset.cat === filter) {
-        item.style.display = '';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-  });
-});
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLB(null,true); });
 </script>
-</body>
-</html>
+</body></html>

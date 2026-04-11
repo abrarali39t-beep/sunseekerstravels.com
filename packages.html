@@ -1,886 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kashmir tour packages by Sun Seekers Travels — 3-day, 5-day, and 7-day curated itineraries covering Srinagar, Gulmarg, Pahalgam, Sonmarg, and more.">
-<meta name="keywords" content="Kashmir tour packages, Srinagar tour, Gulmarg package, honeymoon Kashmir, Kashmir holiday package, 5 days Kashmir itinerary">
-<title>Tour Packages | Sun Seekers Travels – Kashmir Itineraries</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kashmir tour packages by Sun Seekers Travels — all managed live from admin panel.">
+<title>Tour Packages | Sun Seekers Travels</title>
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
 <style>
-/* ── Package Cards ── */
-.pkg-card {
-  background: var(--navy-mid);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-}
-.pkg-card:hover {
-  transform: translateY(-7px);
-  border-color: var(--gold);
-  box-shadow: var(--shadow);
-}
-.pkg-img {
-  height: 230px;
-  overflow: hidden;
-  position: relative;
-}
-.pkg-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-.pkg-card:hover .pkg-img img { transform: scale(1.07); }
-
-.pkg-ribbon {
-  position: absolute;
-  top: 16px;
-  left: 0;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  color: var(--navy);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 6px 16px 6px 14px;
-  clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
-  padding-right: 22px;
-}
-.pkg-popular {
-  position: absolute;
-  top: 16px;
-  right: 12px;
-  background: rgba(10,22,40,0.85);
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 20px;
-}
-.pkg-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
-.pkg-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-.pkg-tagline {
-  font-size: 0.85rem;
-  color: var(--gold);
-  font-style: italic;
-  margin-bottom: 14px;
-}
-.pkg-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 18px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--border);
-}
-.pkg-meta-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-light);
-}
-.pkg-highlights {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 22px;
-  flex: 1;
-}
-.pkg-highlight {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-size: 0.85rem;
-  color: var(--text-light);
-  line-height: 1.5;
-}
-.pkg-highlight::before {
-  content: '→';
-  color: var(--gold);
-  flex-shrink: 0;
-  font-size: 11px;
-  margin-top: 2px;
-}
-.pkg-price-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: auto;
-}
-.pkg-price {
-  display: flex;
-  flex-direction: column;
-}
-.pkg-price-from {
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--text-mid);
-}
-.pkg-price-val {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  line-height: 1.1;
-}
-.pkg-price-note {
-  font-size: 10px;
-  color: var(--text-mid);
-}
-
-/* Itinerary Accordion */
-.day-block {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  margin-bottom: 10px;
-  overflow: hidden;
-  transition: var(--transition);
-}
-.day-block:hover { border-color: rgba(201,153,58,0.4); }
-.day-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 22px;
-  cursor: pointer;
-  background: var(--navy-mid);
-  transition: var(--transition);
-  user-select: none;
-}
-.day-header:hover { background: rgba(201,153,58,0.05); }
-.day-num {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(201,153,58,0.15);
-  border: 1px solid rgba(201,153,58,0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--gold);
-  flex-shrink: 0;
-}
-.day-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 600;
-  flex: 1;
-}
-.day-toggle {
-  color: var(--gold);
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
-.day-block.open .day-toggle { transform: rotate(45deg); }
-.day-content {
-  display: none;
-  padding: 20px 22px 22px;
-  background: rgba(201,153,58,0.03);
-  border-top: 1px solid var(--border);
-  font-size: 0.875rem;
-  color: var(--text-light);
-  line-height: 1.8;
-}
-.day-block.open .day-content { display: block; }
-.day-activities {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 12px;
-}
-.day-activity {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  padding: 10px 14px;
-  background: rgba(255,255,255,0.03);
-  border-radius: var(--radius);
-  border-left: 2px solid var(--gold);
-}
-
-/* Inclusions / Exclusions */
-.inc-table {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.inc-col { display: flex; flex-direction: column; gap: 10px; }
-.inc-item {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-size: 0.875rem;
-  color: var(--text-light);
-  padding: 10px 14px;
-  background: var(--navy-mid);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-}
-.inc-item.yes { border-left: 2px solid #22C55E; }
-.inc-item.no  { border-left: 2px solid #EF4444; }
-.inc-icon-yes { color: #22C55E; flex-shrink: 0; }
-.inc-icon-no  { color: #EF4444; flex-shrink: 0; }
-
-@media(max-width:768px) {
-  .inc-table { grid-template-columns: 1fr; }
-  .pkg-price-row { flex-direction: column; align-items: flex-start; }
-  .pkg-price-row .btn { width: 100%; justify-content: center; }
-}
+.pkg-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column}
+.pkg-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow)}
+.pkg-img{height:230px;overflow:hidden;position:relative}
+.pkg-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.pkg-card:hover .pkg-img img{transform:scale(1.07)}
+.pkg-ribbon{position:absolute;top:16px;left:0;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 18px 6px 14px;clip-path:polygon(0 0,100% 0,90% 50%,100% 100%,0 100%)}
+.pkg-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.pkg-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:4px}
+.pkg-tagline{font-size:0.85rem;color:var(--gold);font-style:italic;margin-bottom:12px}
+.pkg-highlights{flex:1;display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.pkg-highlight{display:flex;gap:8px;font-size:0.83rem;color:var(--text-light);line-height:1.5}
+.pkg-highlight::before{content:'→';color:var(--gold);flex-shrink:0}
+.pkg-price-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}
+.pkg-price-from{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-mid)}
+.pkg-price-val{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold-light);line-height:1.1}
+.pkg-duration{font-size:10px;color:var(--text-mid)}
+@media(max-width:768px){.pkg-price-row{flex-direction:column;align-items:flex-start}.pkg-price-row .btn{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
-
-<!-- NAVBAR -->
 <nav class="navbar scrolled" id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">☀️</div>
-      <div class="nav-logo-text">
-        <span class="nav-logo-name">Sun Seekers</span>
-        <span class="nav-logo-sub">Travels · Srinagar</span>
-      </div>
-    </a>
+    <a href="index.html" class="nav-logo"><div class="nav-logo-icon">☀️</div><div class="nav-logo-text"><span class="nav-logo-name">Sun Seekers</span><span class="nav-logo-sub">Travels · Srinagar</span></div></a>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="fleet.html">Fleet</a>
-      <a href="services.html">Services</a>
-      <a href="packages.html" class="active">Packages</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="fleet.html">Fleet</a>
+      <a href="services.html">Services</a><a href="packages.html" class="active">Packages</a>
+      <a href="gallery.html">Gallery</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
     </div>
-    <div class="nav-cta">
-      <a href="tel:+916005868858" class="btn btn-outline">📞 Call Now</a>
-      <a href="contact.html" class="btn btn-gold">Book Now</a>
-    </div>
+    <div class="nav-cta"><a href="tel:+916005868858" class="btn btn-outline">📞 Call Now</a><a href="contact.html" class="btn btn-gold">Book Now</a></div>
     <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-nav">
   <a href="index.html">Home</a><a href="about.html">About Us</a><a href="fleet.html">Our Fleet</a>
   <a href="services.html">Services</a><a href="packages.html">Packages</a>
-  <a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
+  <a href="gallery.html">Gallery</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
   <div class="mobile-btns">
     <a href="tel:+916005868858" class="btn btn-outline">📞 +91 6005868858</a>
     <a href="https://wa.me/916005868858" class="btn btn-whatsapp">💬 WhatsApp Us</a>
     <a href="contact.html" class="btn btn-gold">✈️ Book a Trip</a>
   </div>
 </div>
-
-<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1585506942812-e72b29cef752?w=1600&q=85')"></div>
   <div class="page-hero-overlay"></div>
   <div class="container page-hero-content">
     <div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> Tour Packages</div>
-    <div class="tag">Curated Kashmir Journeys</div>
+    <div class="tag">Live from Firebase</div>
     <h1 class="section-title" style="font-size:clamp(2.2rem,5vw,3.8rem)">Kashmir Tour Packages</h1>
     <div class="divider"></div>
-    <p style="color:var(--text-light);max-width:580px;font-size:1.05rem;line-height:1.8;font-weight:300">
-      Hand-crafted itineraries for every type of traveller — from quick weekend escapes to in-depth valley explorations. All packages include our premium fleet and expert local drivers.
-    </p>
+    <p style="color:var(--text-light);max-width:580px;font-size:1.05rem;line-height:1.8;font-weight:300">All packages are managed from the admin panel. Edit, add or remove any package — changes appear here instantly.</p>
   </div>
 </section>
-
-<!-- FILTER BAR -->
-<div style="background:var(--navy-mid);border-bottom:1px solid var(--border);padding:20px 0;position:sticky;top:80px;z-index:100">
-  <div class="container" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;flex-wrap:wrap">
-    <button class="pkg-filter btn btn-gold" data-f="all" style="padding:10px 20px;font-size:11px">All Packages</button>
-    <button class="pkg-filter btn btn-outline" data-f="short" style="padding:10px 20px;font-size:11px">⚡ Short Trips (1–3 days)</button>
-    <button class="pkg-filter btn btn-outline" data-f="medium" style="padding:10px 20px;font-size:11px">🏔️ Medium (4–5 days)</button>
-    <button class="pkg-filter btn btn-outline" data-f="long" style="padding:10px 20px;font-size:11px">🌟 Grand (6–8 days)</button>
-    <button class="pkg-filter btn btn-outline" data-f="honeymoon" style="padding:10px 20px;font-size:11px">💍 Honeymoon</button>
-    <button class="pkg-filter btn btn-outline" data-f="winter" style="padding:10px 20px;font-size:11px">❄️ Winter Special</button>
+<div style="background:var(--navy-mid);border-bottom:1px solid var(--border);padding:18px 0;position:sticky;top:80px;z-index:100">
+  <div class="container" style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="pkg-filter btn btn-gold" data-cat="all" style="padding:10px 18px;font-size:11px">All Packages</button>
+    <button class="pkg-filter btn btn-outline" data-cat="short" style="padding:10px 18px;font-size:11px">⚡ Short (1–3 days)</button>
+    <button class="pkg-filter btn btn-outline" data-cat="medium" style="padding:10px 18px;font-size:11px">🏔️ Medium (4–5 days)</button>
+    <button class="pkg-filter btn btn-outline" data-cat="long" style="padding:10px 18px;font-size:11px">🌟 Grand (6+ days)</button>
+    <button class="pkg-filter btn btn-outline" data-cat="honeymoon" style="padding:10px 18px;font-size:11px">💍 Honeymoon</button>
+    <button class="pkg-filter btn btn-outline" data-cat="winter" style="padding:10px 18px;font-size:11px">❄️ Winter Special</button>
   </div>
 </div>
-
-<!-- PACKAGES GRID -->
 <section class="section-pad">
   <div class="container">
-    <div class="grid-3" id="packagesGrid">
-
-      <!-- Package 1: Weekend Srinagar -->
-      <div class="pkg-card reveal reveal-delay-1" data-pkg="short">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=700&q=85" alt="Srinagar Weekend" loading="lazy">
-          <div class="pkg-ribbon">2 Days</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Srinagar Weekend Escape</h3>
-          <p class="pkg-tagline">"Dal Lake, Gardens & Old City"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 2 Days</div>
-            <div class="pkg-meta-item">👥 2–8 People</div>
-            <div class="pkg-meta-item">🚗 Sedan / SUV</div>
-            <div class="pkg-meta-item">📍 Srinagar Only</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Shikara ride on Dal Lake at sunrise</div>
-            <div class="pkg-highlight">Mughal Gardens — Nishat &amp; Shalimar Bagh</div>
-            <div class="pkg-highlight">Shankaracharya Temple &amp; Pari Mahal</div>
-            <div class="pkg-highlight">Old Srinagar bazaars &amp; Jama Masjid</div>
-            <div class="pkg-highlight">Airport pickup &amp; drop included</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹4,500</span>
-              <span class="pkg-price-note">per person (min. 2 pax)</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Package 2: Classic 3-Day -->
-      <div class="pkg-card reveal reveal-delay-2" data-pkg="short">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=700&q=85" alt="Gulmarg 3 Days" loading="lazy">
-          <div class="pkg-ribbon">3 Days</div>
-          <div class="pkg-popular">⭐ Best Seller</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Classic Kashmir — 3 Days</h3>
-          <p class="pkg-tagline">"Srinagar · Gulmarg · Pahalgam"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 3 Days</div>
-            <div class="pkg-meta-item">👥 2–10 People</div>
-            <div class="pkg-meta-item">🚙 Innova / Crysta</div>
-            <div class="pkg-meta-item">📍 3 Locations</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Day 1: Srinagar sightseeing + Dal Lake shikara</div>
-            <div class="pkg-highlight">Day 2: Gulmarg — gondola ride &amp; snow activities</div>
-            <div class="pkg-highlight">Day 3: Pahalgam — Betaab Valley &amp; Baisaran</div>
-            <div class="pkg-highlight">All transfers in premium AC vehicles</div>
-            <div class="pkg-highlight">Airport pickup &amp; drop on Day 1 &amp; Day 3</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹8,999</span>
-              <span class="pkg-price-note">per person (min. 2 pax)</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Package 3: Honeymoon -->
-      <div class="pkg-card reveal reveal-delay-3" data-pkg="honeymoon">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=700&q=85" alt="Honeymoon Kashmir" loading="lazy">
-          <div class="pkg-ribbon">4 Days</div>
-          <div class="pkg-popular">💍 Honeymoon</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Romantic Kashmir Honeymoon</h3>
-          <p class="pkg-tagline">"A love story set in paradise"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 4 Days</div>
-            <div class="pkg-meta-item">👥 Couple</div>
-            <div class="pkg-meta-item">✨ Innova Crysta</div>
-            <div class="pkg-meta-item">💐 Decorated Car</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Day 1: Arrival + houseboat stay on Dal Lake</div>
-            <div class="pkg-highlight">Day 2: Gulmarg — gondola to Apharwat Peak</div>
-            <div class="pkg-highlight">Day 3: Pahalgam — Lidder riverbank picnic</div>
-            <div class="pkg-highlight">Day 4: Sonmarg + Thajiwas Glacier</div>
-            <div class="pkg-highlight">Decorated Crysta, floral arrangements included</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹14,999</span>
-              <span class="pkg-price-note">per couple</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Package 4: Complete Kashmir 5 Days -->
-      <div class="pkg-card reveal reveal-delay-1" data-pkg="medium">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=85" alt="5 Days Kashmir" loading="lazy">
-          <div class="pkg-ribbon">5 Days</div>
-          <div class="pkg-popular">🏆 Most Complete</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Complete Kashmir — 5 Days</h3>
-          <p class="pkg-tagline">"Everything Kashmir in one journey"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 5 Days</div>
-            <div class="pkg-meta-item">👥 2–8 People</div>
-            <div class="pkg-meta-item">🚙 Innova / Crysta</div>
-            <div class="pkg-meta-item">📍 5 Destinations</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Day 1: Srinagar city tour + Dal Lake</div>
-            <div class="pkg-highlight">Day 2: Gulmarg ski slopes &amp; gondola</div>
-            <div class="pkg-highlight">Day 3: Pahalgam &amp; Betaab Valley</div>
-            <div class="pkg-highlight">Day 4: Sonmarg &amp; Thajiwas Glacier</div>
-            <div class="pkg-highlight">Day 5: Doodhpathri &amp; departure</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹12,500</span>
-              <span class="pkg-price-note">per person (min. 2 pax)</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Package 5: Family Group -->
-      <div class="pkg-card reveal reveal-delay-2" data-pkg="medium">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=700&q=85" alt="Family Kashmir" loading="lazy">
-          <div class="pkg-ribbon">5 Days</div>
-          <div class="pkg-popular">👨‍👩‍👧 Family</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Family Kashmir Adventure</h3>
-          <p class="pkg-tagline">"Memories for every generation"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 5 Days</div>
-            <div class="pkg-meta-item">👥 6–15 People</div>
-            <div class="pkg-meta-item">🚐 Urbania / Traveller</div>
-            <div class="pkg-meta-item">🎮 Kid-Friendly</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Shikara boat rides &amp; houseboat experience</div>
-            <div class="pkg-highlight">Pony rides in Pahalgam for kids</div>
-            <div class="pkg-highlight">Snow play in Gulmarg (seasonal)</div>
-            <div class="pkg-highlight">Local cuisine experiences included</div>
-            <div class="pkg-highlight">Force Urbania with ample luggage space</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹9,999</span>
-              <span class="pkg-price-note">per person (min. 6 pax)</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Package 6: Winter Wonderland -->
-      <div class="pkg-card reveal reveal-delay-3" data-pkg="winter">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=700&q=85" alt="Winter Kashmir" loading="lazy">
-          <div class="pkg-ribbon">4 Days</div>
-          <div class="pkg-popular">❄️ Winter Special</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Winter Wonderland — Kashmir</h3>
-          <p class="pkg-tagline">"Where snow dreams come true"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 4 Days</div>
-            <div class="pkg-meta-item">👥 2–8 People</div>
-            <div class="pkg-meta-item">🚙 4WD Crysta</div>
-            <div class="pkg-meta-item">❄️ Dec–Feb Only</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Frozen Dal Lake shikara &amp; ice walks</div>
-            <div class="pkg-highlight">Gulmarg skiing &amp; snowboarding</div>
-            <div class="pkg-highlight">Pahalgam snow trek to Baisaran</div>
-            <div class="pkg-highlight">Kangri (fire pot) &amp; Kashmiri Kahwa experience</div>
-            <div class="pkg-highlight">4WD mountain-ready vehicles for icy roads</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹13,999</span>
-              <span class="pkg-price-note">per person (min. 2 pax)</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Package 7: Grand Kashmir 7 Days -->
-      <div class="pkg-card reveal reveal-delay-1" data-pkg="long">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=85" alt="Grand Kashmir 7 Days" loading="lazy">
-          <div class="pkg-ribbon">7 Days</div>
-          <div class="pkg-popular">👑 Premium</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Grand Kashmir — 7 Days</h3>
-          <p class="pkg-tagline">"The ultimate valley experience"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 7 Days</div>
-            <div class="pkg-meta-item">👥 2–6 People</div>
-            <div class="pkg-meta-item">✨ Innova Crysta</div>
-            <div class="pkg-meta-item">📍 7+ Destinations</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Days 1–2: Srinagar — Dal, Gardens, Old City</div>
-            <div class="pkg-highlight">Day 3: Gulmarg — full day ski &amp; gondola</div>
-            <div class="pkg-highlight">Day 4: Pahalgam &amp; Aru Valley</div>
-            <div class="pkg-highlight">Day 5: Sonmarg &amp; Zoji La Pass viewpoint</div>
-            <div class="pkg-highlight">Day 6: Doodhpathri &amp; Yusmarg meadows</div>
-            <div class="pkg-highlight">Day 7: Wular Lake &amp; Baramulla transfer</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹18,999</span>
-              <span class="pkg-price-note">per person (min. 2 pax)</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Package 8: Group Pilgrimage -->
-      <div class="pkg-card reveal reveal-delay-2" data-pkg="long">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=700&q=85" alt="Amarnath Pilgrimage" loading="lazy">
-          <div class="pkg-ribbon">6 Days</div>
-          <div class="pkg-popular">🙏 Pilgrimage</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Kashmir Pilgrimage Tour</h3>
-          <p class="pkg-tagline">"Sacred journeys through the Valley"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 6 Days</div>
-            <div class="pkg-meta-item">👥 4–20 People</div>
-            <div class="pkg-meta-item">🚐 Traveller / Bus</div>
-            <div class="pkg-meta-item">🙏 Group Friendly</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Shankaracharya Temple, Kheer Bhawani</div>
-            <div class="pkg-highlight">Amarnath Yatra base camp (seasonal)</div>
-            <div class="pkg-highlight">Martand Sun Temple (Anantnag)</div>
-            <div class="pkg-highlight">Char Chinar island on Dal Lake</div>
-            <div class="pkg-highlight">Hazratbal Shrine &amp; Patthar Masjid</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹7,999</span>
-              <span class="pkg-price-note">per person (min. 4 pax)</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Package 9: Photography Tour -->
-      <div class="pkg-card reveal reveal-delay-3" data-pkg="long">
-        <div class="pkg-img">
-          <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=700&q=85" alt="Photography Kashmir" loading="lazy">
-          <div class="pkg-ribbon">5 Days</div>
-          <div class="pkg-popular">📸 Photography</div>
-        </div>
-        <div class="pkg-body">
-          <h3 class="pkg-name">Kashmir Photography Expedition</h3>
-          <p class="pkg-tagline">"Chase the golden light of Kashmir"</p>
-          <div class="pkg-meta">
-            <div class="pkg-meta-item">🗓️ 5 Days</div>
-            <div class="pkg-meta-item">👥 2–6 People</div>
-            <div class="pkg-meta-item">🚙 Innova Crysta</div>
-            <div class="pkg-meta-item">📸 Dawn Access</div>
-          </div>
-          <div class="pkg-highlights">
-            <div class="pkg-highlight">Pre-dawn Dal Lake mist photography</div>
-            <div class="pkg-highlight">Nishat Garden sunrise &amp; golden hour shoots</div>
-            <div class="pkg-highlight">Gulmarg snow landscape &amp; wildlife</div>
-            <div class="pkg-highlight">Pahalgam river reflections &amp; shepherds</div>
-            <div class="pkg-highlight">Flexible schedule to follow the light</div>
-          </div>
-          <div class="pkg-price-row">
-            <div class="pkg-price">
-              <span class="pkg-price-from">Starting From</span>
-              <span class="pkg-price-val">₹15,499</span>
-              <span class="pkg-price-note">per person (min. 2 pax)</span>
-            </div>
-            <a href="contact.html" class="btn btn-gold" style="padding:12px 20px;font-size:12px">Book Now</a>
-          </div>
-        </div>
-      </div>
-
+    <div class="grid-3" id="pkgPageGrid">
+      <div style="grid-column:1/-1;text-align:center;color:var(--text-mid);padding:60px">Loading packages from Firebase…</div>
     </div>
   </div>
 </section>
-
-<!-- SAMPLE ITINERARY: 5 DAYS -->
-<section class="section-pad section-dark">
-  <div class="container">
-    <div class="text-center reveal">
-      <div class="tag">Sample Itinerary</div>
-      <h2 class="section-title">5-Day Complete Kashmir — Day by Day</h2>
-      <div class="divider center"></div>
-      <p class="section-subtitle">A glimpse into how we plan your journey. Every trip is customized to your preferences and pace.</p>
-    </div>
-    <div style="max-width:800px;margin:52px auto 0" id="itinerary">
-
-      <div class="day-block open reveal">
-        <div class="day-header" onclick="toggleDay(this)">
-          <div class="day-num">D1</div>
-          <div class="day-title">Arrival in Srinagar — Welcome to Paradise</div>
-          <span class="day-toggle">+</span>
-        </div>
-        <div class="day-content">
-          <p>Your Kashmir journey begins the moment you land. We'll be at the airport with a name board to escort you to your vehicle for a warm, hassle-free start.</p>
-          <div class="day-activities">
-            <div class="day-activity"><span>🛬</span><span><strong>Airport Pickup</strong> — Sheikh ul Alam International Airport transfer to hotel</span></div>
-            <div class="day-activity"><span>🌊</span><span><strong>Dal Lake Shikara Ride</strong> — An evening on the iconic lake watching the sun set over the mountains</span></div>
-            <div class="day-activity"><span>🌸</span><span><strong>Mughal Garden Drive</strong> — Nishat Bagh &amp; Shalimar Bagh at golden hour</span></div>
-            <div class="day-activity"><span>🏨</span><span><strong>Hotel / Houseboat Check-in</strong> — Rest and prepare for Day 2</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-block reveal">
-        <div class="day-header" onclick="toggleDay(this)">
-          <div class="day-num">D2</div>
-          <div class="day-title">Gulmarg — The Meadow of Flowers</div>
-          <span class="day-toggle">+</span>
-        </div>
-        <div class="day-content">
-          <p>A full day in one of Asia's top ski destinations. Whether you're here for snow sports or just the jaw-dropping scenery, Gulmarg delivers.</p>
-          <div class="day-activities">
-            <div class="day-activity"><span>🚡</span><span><strong>Gondola Ride</strong> — Phase 1 (2,690m) &amp; Phase 2 (3,979m) for panoramic Himalayan views</span></div>
-            <div class="day-activity"><span>⛷️</span><span><strong>Snow Activities</strong> — Skiing, snowboarding, sledging (seasonal &amp; optional)</span></div>
-            <div class="day-activity"><span>🏔️</span><span><strong>Apharwat Peak</strong> — The stunning summit view in winter</span></div>
-            <div class="day-activity"><span>🍵</span><span><strong>Kehwa Break</strong> — Traditional Kashmiri tea with kangri (fire pot)</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-block reveal">
-        <div class="day-header" onclick="toggleDay(this)">
-          <div class="day-num">D3</div>
-          <div class="day-title">Pahalgam — Valley of Shepherds</div>
-          <span class="day-toggle">+</span>
-        </div>
-        <div class="day-content">
-          <p>Pahalgam's lush green meadows and crystal-clear Lidder river make it one of Kashmir's most beloved destinations.</p>
-          <div class="day-activities">
-            <div class="day-activity"><span>🌿</span><span><strong>Betaab Valley</strong> — Named after the Bollywood classic; stunning alpine meadow</span></div>
-            <div class="day-activity"><span>🏞️</span><span><strong>Aru Valley</strong> — Pristine meadow and ideal trekking base</span></div>
-            <div class="day-activity"><span>🐴</span><span><strong>Pony Rides</strong> — Optional horse rides through the valley (not included)</span></div>
-            <div class="day-activity"><span>🌊</span><span><strong>Lidder River Walk</strong> — Evening stroll along the glacial river</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-block reveal">
-        <div class="day-header" onclick="toggleDay(this)">
-          <div class="day-num">D4</div>
-          <div class="day-title">Sonmarg — The Golden Meadow</div>
-          <span class="day-toggle">+</span>
-        </div>
-        <div class="day-content">
-          <p>The drive to Sonmarg is as spectacular as the destination itself. Winding roads, glacial rivers, and Himalayan peaks all the way.</p>
-          <div class="day-activities">
-            <div class="day-activity"><span>🏔️</span><span><strong>Thajiwas Glacier</strong> — Pony or walk to the famous glacier</span></div>
-            <div class="day-activity"><span>🌄</span><span><strong>Zoji La Pass Viewpoint</strong> — One of India's most scenic mountain passes</span></div>
-            <div class="day-activity"><span>🐟</span><span><strong>Sindh River</strong> — Famous for trout fishing (optional)</span></div>
-            <div class="day-activity"><span>🌅</span><span><strong>Sunset Drive Back</strong> — Golden hour return to Srinagar</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-block reveal">
-        <div class="day-header" onclick="toggleDay(this)">
-          <div class="day-num">D5</div>
-          <div class="day-title">Doodhpathri & Departure</div>
-          <span class="day-toggle">+</span>
-        </div>
-        <div class="day-content">
-          <p>End your Kashmir journey on a peaceful high note — the "Bowl of Milk" meadow that most tourists never discover.</p>
-          <div class="day-activities">
-            <div class="day-activity"><span>🌾</span><span><strong>Doodhpathri</strong> — Pristine alpine meadow with milky white streams from melting snow</span></div>
-            <div class="day-activity"><span>🛍️</span><span><strong>Srinagar Shopping</strong> — Pashmina, saffron, walnut wood crafts, and Kashmiri carpets</span></div>
-            <div class="day-activity"><span>🛫</span><span><strong>Airport Drop</strong> — Comfortable, timely transfer for your flight home</span></div>
-          </div>
-        </div>
-      </div>
-
+<section class="section-pad section-dark" style="text-align:center">
+  <div class="container reveal">
+    <div class="tag">Custom Package</div>
+    <h2 class="section-title">Don't See What You Need?</h2>
+    <div class="divider center"></div>
+    <p class="section-subtitle">Tell us your dates, group size and interests — we'll build a custom Kashmir itinerary for you.</p>
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:36px">
+      <a href="contact.html" class="btn btn-gold">✈️ Request Custom Package</a>
+      <a href="https://wa.me/916005868858" class="btn btn-whatsapp" target="_blank">💬 WhatsApp Us</a>
     </div>
   </div>
 </section>
-
-<!-- INCLUSIONS & EXCLUSIONS -->
-<section class="section-pad">
-  <div class="container">
-    <div class="text-center reveal">
-      <div class="tag">Package Details</div>
-      <h2 class="section-title">What's Included &amp; Excluded</h2>
-      <div class="divider center"></div>
-    </div>
-    <div class="inc-table reveal" style="margin-top:48px;max-width:900px;margin-left:auto;margin-right:auto">
-      <div class="inc-col">
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#22C55E;margin-bottom:8px;padding:0 4px">✅ Included in All Packages</div>
-        <div class="inc-item yes"><span class="inc-icon-yes">✓</span> Airport pickup and drop</div>
-        <div class="inc-item yes"><span class="inc-icon-yes">✓</span> All inter-city transfers</div>
-        <div class="inc-item yes"><span class="inc-icon-yes">✓</span> AC vehicle throughout the trip</div>
-        <div class="inc-item yes"><span class="inc-icon-yes">✓</span> Experienced local driver-guide</div>
-        <div class="inc-item yes"><span class="inc-icon-yes">✓</span> Toll, parking &amp; fuel charges</div>
-        <div class="inc-item yes"><span class="inc-icon-yes">✓</span> 24/7 WhatsApp support</div>
-        <div class="inc-item yes"><span class="inc-icon-yes">✓</span> Vehicle insurance coverage</div>
-        <div class="inc-item yes"><span class="inc-icon-yes">✓</span> GST &amp; all applicable taxes</div>
-      </div>
-      <div class="inc-col">
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#EF4444;margin-bottom:8px;padding:0 4px">✗ Not Included (Can Be Added)</div>
-        <div class="inc-item no"><span class="inc-icon-no">✗</span> Hotel / houseboat accommodation</div>
-        <div class="inc-item no"><span class="inc-icon-no">✗</span> Meals &amp; food expenses</div>
-        <div class="inc-item no"><span class="inc-icon-no">✗</span> Gondola / entry tickets</div>
-        <div class="inc-item no"><span class="inc-icon-no">✗</span> Pony rides &amp; adventure activities</div>
-        <div class="inc-item no"><span class="inc-icon-no">✗</span> Travel insurance</div>
-        <div class="inc-item no"><span class="inc-icon-no">✗</span> Personal expenses &amp; shopping</div>
-        <div class="inc-item no"><span class="inc-icon-no">✗</span> Flight tickets</div>
-        <div class="inc-item no"><span class="inc-icon-no">✗</span> Any change in itinerary costs</div>
-      </div>
-    </div>
-    <p style="text-align:center;color:var(--text-mid);font-size:0.85rem;margin-top:24px">
-      All exclusions can be arranged by our team at additional cost. Ask us for a fully inclusive custom package.
-    </p>
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div><div class="nav-logo" style="margin-bottom:16px"><div class="nav-logo-icon">☀️</div><div class="nav-logo-text"><span class="nav-logo-name">Sun Seekers Travels</span><span class="nav-logo-sub">Srinagar, Kashmir</span></div></div><p class="footer-desc">Kashmir's trusted travel partner. Premium fleet, local expertise, unmatched hospitality.</p><div class="social-links"><a href="#" class="social-link">📘</a><a href="#" class="social-link">📸</a><a href="https://wa.me/916005868858" class="social-link">💬</a></div></div>
+    <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="fleet.html">Fleet</a><a href="services.html">Services</a><a href="packages.html">Packages</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div></div>
+    <div><h4 class="footer-heading">Packages</h4><div class="footer-links" id="footerPkgLinks"><a href="packages.html">View All Packages</a></div></div>
+    <div><h4 class="footer-heading">Contact</h4><div class="footer-links"><a href="tel:+916005868858">📞 +91 6005868858</a><a href="tel:+917006567457">📞 +91 7006567457</a><a href="mailto:sunseekerstravels1@gmail.com">✉️ sunseekerstravels1@gmail.com</a><a href="contact.html">📍 Zia Complex, Soura, Srinagar</a></div></div>
   </div>
-</section>
-
-<!-- CUSTOM PACKAGE CTA -->
-<section class="section-pad section-dark">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1000px;margin:0 auto" class="custom-split">
-      <div class="reveal">
-        <div class="tag">Custom Packages</div>
-        <h2 class="section-title" style="font-size:2rem">Don't See What You Need?</h2>
-        <div class="divider"></div>
-        <p style="color:var(--text-light);line-height:1.9;margin-bottom:28px">
-          Every traveller is different. Tell us your dates, group size, interests, and budget — and we'll build a Kashmir itinerary that's perfectly tailored to you. No templates, no one-size-fits-all.
-        </p>
-        <div style="display:flex;flex-wrap:wrap;gap:12px">
-          <a href="contact.html" class="btn btn-gold">✈️ Request Custom Package</a>
-          <a href="https://wa.me/916005868858?text=Hi!%20I%20want%20a%20custom%20Kashmir%20package." class="btn btn-whatsapp" target="_blank">💬 WhatsApp Us</a>
-        </div>
-      </div>
-      <div class="reveal reveal-delay-2">
-        <div style="display:flex;flex-direction:column;gap:14px">
-          <div class="contact-info-card">
-            <div class="contact-info-icon">🗺️</div>
-            <div><div class="contact-info-label">Custom Itinerary</div><div class="contact-info-val">Share your wishlist and we'll plan it</div></div>
-          </div>
-          <div class="contact-info-card">
-            <div class="contact-info-icon">💰</div>
-            <div><div class="contact-info-label">Flexible Pricing</div><div class="contact-info-val">Budget and luxury options available</div></div>
-          </div>
-          <div class="contact-info-card">
-            <div class="contact-info-icon">⚡</div>
-            <div><div class="contact-info-label">Quick Response</div><div class="contact-info-val">Quote within 1 hour via WhatsApp</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="nav-logo" style="margin-bottom:16px">
-          <div class="nav-logo-icon">☀️</div>
-          <div class="nav-logo-text"><span class="nav-logo-name">Sun Seekers Travels</span><span class="nav-logo-sub">Srinagar, Kashmir</span></div>
-        </div>
-        <p class="footer-desc">Kashmir's trusted travel and vehicle rental partner. Premium fleet, local expertise, and unmatched hospitality for every journey.</p>
-        <div class="social-links">
-          <a href="#" class="social-link">📘</a><a href="#" class="social-link">📸</a>
-          <a href="https://wa.me/916005868858" class="social-link">💬</a>
-          <a href="mailto:sunseekerstravels1@gmail.com" class="social-link">📧</a>
-        </div>
-      </div>
-      <div>
-        <h4 class="footer-heading">Quick Links</h4>
-        <div class="footer-links">
-          <a href="index.html">Home</a><a href="about.html">About Us</a><a href="fleet.html">Our Fleet</a>
-          <a href="services.html">Services</a><a href="packages.html">Packages</a>
-          <a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
-        </div>
-      </div>
-      <div>
-        <h4 class="footer-heading">Popular Packages</h4>
-        <div class="footer-links">
-          <a href="packages.html">Weekend Srinagar (2D)</a>
-          <a href="packages.html">Classic Kashmir (3D)</a>
-          <a href="packages.html">Honeymoon Special (4D)</a>
-          <a href="packages.html">Complete Kashmir (5D)</a>
-          <a href="packages.html">Grand Tour (7D)</a>
-          <a href="packages.html">Winter Wonderland</a>
-        </div>
-      </div>
-      <div>
-        <h4 class="footer-heading">Contact</h4>
-        <div class="footer-links">
-          <a href="tel:+916005868858">📞 +91 6005868858</a>
-          <a href="tel:+917006567457">📞 +91 7006567457</a>
-          <a href="mailto:sunseekerstravels1@gmail.com">✉️ sunseekerstravels1@gmail.com</a>
-          <a href="contact.html">📍 Zia Complex, Soura, Srinagar</a>
-          <a href="http://sunseekerstravels.com" target="_blank">🌐 sunseekerstravels.com</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Sun Seekers Travels. All rights reserved.</span>
-      <span>Designed with ❤️ for Kashmir Tourism</span>
-    </div>
-  </div>
-</footer>
-
-<a href="https://wa.me/916005868858?text=Hello!%20I%20am%20interested%20in%20a%20Kashmir%20tour%20package." class="sticky-wa" target="_blank">💬</a>
-
-<script src="main.js"></script>
+  <div class="footer-bottom"><span>© 2025 Sun Seekers Travels.</span></div>
+</div></footer>
+<a href="https://wa.me/916005868858" class="sticky-wa" target="_blank">💬</a>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script><script src="main.js"></script>
 <script>
-// Day accordion
-function toggleDay(header) {
-  const block = header.parentElement;
-  block.classList.toggle('open');
+let allPkgs = [];
+(async function() {
+  try { await seedAllDefaultData(); } catch(e) {}
+  try {
+    allPkgs = await getAll('packages');
+    renderPkgs(allPkgs);
+    const fl = document.getElementById('footerPkgLinks');
+    if (fl) fl.innerHTML = allPkgs.slice(0,6).map(p => `<a href="packages.html">${p.name}</a>`).join('');
+  } catch(e) {
+    document.getElementById('pkgPageGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-mid)">Firebase not connected. Add credentials to firebase-config.js</div>';
+  }
+})();
+function renderPkgs(pkgs) {
+  const g = document.getElementById('pkgPageGrid');
+  if (!pkgs.length) { g.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-mid)">No packages yet. Add some from the admin panel.</div>'; return; }
+  g.innerHTML = pkgs.map((p,i) => `
+    <div class="pkg-card reveal reveal-delay-${(i%3)+1}" data-cat="${p.category}">
+      <div class="pkg-img">
+        <img src="${p.image||'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=85'}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=85'">
+        <div class="pkg-ribbon">${p.duration||p.badge||''}</div>
+        ${p.badge ? `<div style="position:absolute;top:16px;right:12px;background:rgba(10,22,40,0.85);border:1px solid var(--gold);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:20px">${p.badge}</div>` : ''}
+      </div>
+      <div class="pkg-body">
+        <h3 class="pkg-name">${p.name}</h3>
+        <div class="pkg-tagline">"${p.tagline||''}"</div>
+        <div class="pkg-highlights">${(p.highlights||[]).slice(0,4).map(h=>`<div class="pkg-highlight">${h}</div>`).join('')}</div>
+        <div class="pkg-price-row">
+          <div><div class="pkg-price-from">Starting From</div><div class="pkg-price-val">${p.price||'—'}</div><div class="pkg-duration">${p.duration||''}</div></div>
+          <a href="contact.html" class="btn btn-gold" style="padding:12px 18px;font-size:12px">Book Now</a>
+        </div>
+      </div>
+    </div>`).join('');
+  reObserve();
 }
-
-// Package filter
-const pkgFilters = document.querySelectorAll('.pkg-filter');
-const pkgCards  = document.querySelectorAll('.pkg-card');
-pkgFilters.forEach(btn => {
-  btn.addEventListener('click', () => {
-    pkgFilters.forEach(b => { b.classList.remove('btn-gold'); b.classList.add('btn-outline'); });
-    btn.classList.add('btn-gold'); btn.classList.remove('btn-outline');
-    const f = btn.dataset.f;
-    pkgCards.forEach(card => {
-      card.style.display = (f === 'all' || card.dataset.pkg === f) ? '' : 'none';
-    });
-  });
+document.querySelectorAll('.pkg-filter').forEach(btn => {
+  btn.onclick = function() {
+    document.querySelectorAll('.pkg-filter').forEach(b => { b.classList.remove('btn-gold'); b.classList.add('btn-outline'); });
+    this.classList.add('btn-gold'); this.classList.remove('btn-outline');
+    const cat = this.dataset.cat;
+    renderPkgs(cat === 'all' ? allPkgs : allPkgs.filter(p => p.category === cat));
+  };
 });
 </script>
-<style>
-@media(max-width:768px){.custom-split{grid-template-columns:1fr!important}}
-</style>
-</body>
-</html>
+</body></html>
