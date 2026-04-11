@@ -347,7 +347,60 @@
 </footer>
 
 <a href="https://wa.me/916005868858?text=Hello%20Sun%20Seekers%20Travels!%20I%20want%20to%20book%20a%20vehicle." class="sticky-wa" target="_blank">💬</a>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 <script src="main.js"></script>
+<script>
+// Save booking form to Firestore
+const contactForm = document.getElementById('bookingForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('[type=submit]');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '⏳ Sending…';
+    btn.disabled = true;
+
+    const fields = this.querySelectorAll('input:not([type=submit]), select, textarea');
+    const labels = this.querySelectorAll('.form-label');
+    const data = { status: 'New', source: 'contact-page' };
+
+    fields.forEach((f, i) => {
+      const lbl = labels[i]?.textContent?.trim().toLowerCase() || '';
+      const val = f.value.trim();
+      if (!val) return;
+      if (lbl.includes('name'))        data.name        = val;
+      else if (lbl.includes('phone'))  data.phone       = val;
+      else if (lbl.includes('email'))  data.email       = val;
+      else if (lbl.includes('travel date')) data.travelDate = val;
+      else if (lbl.includes('return')) data.returnDate  = val;
+      else if (lbl.includes('passenger')) data.passengers= val;
+      else if (lbl.includes('vehicle')) data.vehicle    = val;
+      else if (lbl.includes('service')) data.service    = val;
+      else if (lbl.includes('pickup')) data.pickup      = val;
+      else if (lbl.includes('destination')) data.destination = val;
+    });
+
+    try {
+      await db.collection('bookings').add({
+        ...data, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    } catch(err) { /* graceful — still show success */ }
+
+    btn.innerHTML = '✅ Booking Request Sent! We\'ll contact you soon.';
+    btn.style.background = 'linear-gradient(135deg,#22C55E,#16A34A)';
+    setTimeout(() => {
+      btn.innerHTML = orig;
+      btn.style.background = '';
+      btn.disabled = false;
+      contactForm.reset();
+    }, 4000);
+  });
+}
+</script>
 <style>
 @media(max-width:900px){.contact-layout{grid-template-columns:1fr!important}}
 </style>

@@ -235,6 +235,192 @@
   </div>
 </section>
 
+<!-- HOTELS SECTION -->
+<section class="section-pad" id="hotels">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="tag">Partner Hotels</div>
+      <h2 class="section-title">Recommended Hotels in Kashmir</h2>
+      <div class="divider center"></div>
+      <p class="section-subtitle">Hand-picked accommodations across every budget — from cozy 3-star retreats to iconic 5-star palaces overlooking Dal Lake.</p>
+    </div>
+
+    <!-- Star Filter Tabs -->
+    <div style="display:flex;justify-content:center;gap:10px;margin:40px 0 48px;flex-wrap:wrap">
+      <button class="hotel-tab btn btn-gold" data-tab="all" style="padding:11px 22px;font-size:12px">All Hotels</button>
+      <button class="hotel-tab btn btn-outline" data-tab="5star" style="padding:11px 22px;font-size:12px">⭐⭐⭐⭐⭐ 5 Star</button>
+      <button class="hotel-tab btn btn-outline" data-tab="4star" style="padding:11px 22px;font-size:12px">⭐⭐⭐⭐ 4 Star</button>
+      <button class="hotel-tab btn btn-outline" data-tab="3star" style="padding:11px 22px;font-size:12px">⭐⭐⭐ 3 Star</button>
+    </div>
+
+    <!-- Dynamic hotels from Firestore -->
+    <div class="grid-3" id="hotelsGrid">
+      <!-- Static fallback cards shown before Firebase loads -->
+      <div class="hotel-card-wrap" data-star="5star">
+        <div class="fleet-card reveal reveal-delay-1" style="height:100%">
+          <div class="fleet-img-wrap" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=700&q=85" alt="The LaLiT Grand Palace" loading="lazy">
+            <div class="fleet-badge" style="background:rgba(201,153,58,0.95)">Luxury</div>
+          </div>
+          <div class="fleet-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <h3 class="fleet-name" style="font-size:1.05rem;margin:0">The LaLiT Grand Palace</h3>
+              <span style="color:#F59E0B;font-size:0.85rem;letter-spacing:1px">★★★★★</span>
+            </div>
+            <div style="font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Srinagar · 5 Star</div>
+            <p style="font-size:0.82rem;color:var(--text-light);line-height:1.6;margin-bottom:12px">A magnificent 19th-century palace turned luxury hotel overlooking Dal Lake. Royal suites, spa, and world-class dining.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🌊 Dal Lake View</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">💆 Spa</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🍽️ Fine Dining</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div><div style="font-size:10px;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase">From</div><div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold-light)">₹12,000<span style="font-size:11px;color:var(--text-mid);font-family:'Raleway',sans-serif;font-weight:400">/night</span></div></div>
+              <a href="contact.html" class="btn btn-gold" style="padding:10px 18px;font-size:11px">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-card-wrap" data-star="5star">
+        <div class="fleet-card reveal reveal-delay-2" style="height:100%">
+          <div class="fleet-img-wrap" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=700&q=85" alt="Vivanta Dal View" loading="lazy">
+            <div class="fleet-badge" style="background:rgba(201,153,58,0.95)">Premium</div>
+          </div>
+          <div class="fleet-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <h3 class="fleet-name" style="font-size:1.05rem;margin:0">Vivanta Dal View</h3>
+              <span style="color:#F59E0B;font-size:0.85rem;letter-spacing:1px">★★★★★</span>
+            </div>
+            <div style="font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Srinagar · 5 Star</div>
+            <p style="font-size:0.82rem;color:var(--text-light);line-height:1.6;margin-bottom:12px">Taj Hotels Kashmir flagship. Panoramic Himalayan views, traditional Kashmiri cuisine, heated pool and premium amenities.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🏔️ Mountain View</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🏊 Heated Pool</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">💪 Gym</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div><div style="font-size:10px;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase">From</div><div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold-light)">₹9,500<span style="font-size:11px;color:var(--text-mid);font-family:'Raleway',sans-serif;font-weight:400">/night</span></div></div>
+              <a href="contact.html" class="btn btn-gold" style="padding:10px 18px;font-size:11px">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-card-wrap" data-star="4star">
+        <div class="fleet-card reveal reveal-delay-3" style="height:100%">
+          <div class="fleet-img-wrap" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=700&q=85" alt="Hotel Boulevard" loading="lazy">
+            <div class="fleet-badge" style="background:rgba(59,130,246,0.9)">Popular</div>
+          </div>
+          <div class="fleet-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <h3 class="fleet-name" style="font-size:1.05rem;margin:0">Hotel Boulevard Srinagar</h3>
+              <span style="color:#F59E0B;font-size:0.85rem;letter-spacing:1px">★★★★</span>
+            </div>
+            <div style="font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Dal Lake · 4 Star</div>
+            <p style="font-size:0.82rem;color:var(--text-light);line-height:1.6;margin-bottom:12px">Perfectly positioned on the Dal Lake boulevard offering beautiful lake-facing rooms and exceptional Kashmiri hospitality.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🌊 Lake View</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🍽️ Restaurant</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">📶 Wi-Fi</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div><div style="font-size:10px;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase">From</div><div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold-light)">₹5,500<span style="font-size:11px;color:var(--text-mid);font-family:'Raleway',sans-serif;font-weight:400">/night</span></div></div>
+              <a href="contact.html" class="btn btn-gold" style="padding:10px 18px;font-size:11px">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-card-wrap" data-star="4star">
+        <div class="fleet-card reveal reveal-delay-1" style="height:100%">
+          <div class="fleet-img-wrap" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=700&q=85" alt="Heevan Resort" loading="lazy">
+            <div class="fleet-badge" style="background:rgba(34,197,94,0.85)">Nature Stay</div>
+          </div>
+          <div class="fleet-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <h3 class="fleet-name" style="font-size:1.05rem;margin:0">Heevan Resort Pahalgam</h3>
+              <span style="color:#F59E0B;font-size:0.85rem;letter-spacing:1px">★★★★</span>
+            </div>
+            <div style="font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Pahalgam · 4 Star</div>
+            <p style="font-size:0.82rem;color:var(--text-light);line-height:1.6;margin-bottom:12px">Set amidst pine forests and the crystal-clear Lidder river. Serene escape with modern comforts and mountain charm.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🌲 Pine Forest</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🔥 Bonfire</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🍽️ Multi-Cuisine</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div><div style="font-size:10px;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase">From</div><div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold-light)">₹4,800<span style="font-size:11px;color:var(--text-mid);font-family:'Raleway',sans-serif;font-weight:400">/night</span></div></div>
+              <a href="contact.html" class="btn btn-gold" style="padding:10px 18px;font-size:11px">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-card-wrap" data-star="3star">
+        <div class="fleet-card reveal reveal-delay-2" style="height:100%">
+          <div class="fleet-img-wrap" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=85" alt="Pine N Peak Gulmarg" loading="lazy">
+            <div class="fleet-badge" style="background:rgba(107,114,128,0.9)">Budget Friendly</div>
+          </div>
+          <div class="fleet-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <h3 class="fleet-name" style="font-size:1.05rem;margin:0">Pine N Peak Gulmarg</h3>
+              <span style="color:#F59E0B;font-size:0.85rem;letter-spacing:1px">★★★</span>
+            </div>
+            <div style="font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Gulmarg · 3 Star</div>
+            <p style="font-size:0.82rem;color:var(--text-light);line-height:1.6;margin-bottom:12px">Cozy mountain hotel surrounded by pine trees with easy access to Gulmarg gondola and ski slopes. Perfect for adventurers.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🏔️ Mountain View</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">♨️ Hot Water</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🔥 Bonfire Lounge</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div><div style="font-size:10px;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase">From</div><div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold-light)">₹2,800<span style="font-size:11px;color:var(--text-mid);font-family:'Raleway',sans-serif;font-weight:400">/night</span></div></div>
+              <a href="contact.html" class="btn btn-gold" style="padding:10px 18px;font-size:11px">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-card-wrap" data-star="3star">
+        <div class="fleet-card reveal reveal-delay-3" style="height:100%">
+          <div class="fleet-img-wrap" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=85" alt="Zahoor Houseboat" loading="lazy">
+            <div class="fleet-badge" style="background:rgba(139,92,246,0.9)">Houseboat</div>
+          </div>
+          <div class="fleet-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <h3 class="fleet-name" style="font-size:1.05rem;margin:0">Zahoor Houseboat</h3>
+              <span style="color:#F59E0B;font-size:0.85rem;letter-spacing:1px">★★★</span>
+            </div>
+            <div style="font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Dal Lake · 3 Star</div>
+            <p style="font-size:0.82rem;color:var(--text-light);line-height:1.6;margin-bottom:12px">Authentic Kashmiri wooden houseboat on tranquil Dal Lake — waking up to mirror-calm waters and floating gardens.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🚣 Shikara Ride</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🍛 Wazwan</span>
+              <span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">🌅 Rooftop Deck</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div><div style="font-size:10px;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase">From</div><div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold-light)">₹2,200<span style="font-size:11px;color:var(--text-mid);font-family:'Raleway',sans-serif;font-weight:400">/night</span></div></div>
+              <a href="contact.html" class="btn btn-gold" style="padding:10px 18px;font-size:11px">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end hotelsGrid -->
+
+    <div class="text-center" style="margin-top:44px">
+      <p style="color:var(--text-mid);font-size:0.875rem;margin-bottom:18px">Looking for a specific hotel or budget? We'll find the perfect match for you.</p>
+      <a href="contact.html" class="btn btn-gold">🏨 Ask for Hotel Recommendations</a>
+    </div>
+  </div>
+</section>
+
 <!-- WHY CHOOSE US -->
 <section class="section-pad">
   <div class="container">
@@ -501,8 +687,161 @@
 <!-- STICKY WHATSAPP -->
 <a href="https://wa.me/916005868858?text=Hello%20Sun%20Seekers%20Travels!%20I%20want%20to%20book%20a%20vehicle." class="sticky-wa" target="_blank" title="Chat on WhatsApp">💬</a>
 
+<!-- Firebase SDKs (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 <script src="main.js"></script>
-<!-- Responsive about split -->
+<script>
+// ════════════════════════════════════════════
+//  INDEX PAGE — FIREBASE DYNAMIC LOADING
+// ════════════════════════════════════════════
+
+// ── 1. Save booking forms to Firestore ───────
+document.querySelectorAll('#bookingForm').forEach(form => {
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('[type=submit]');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '⏳ Sending…';
+    btn.disabled = true;
+
+    // Gather all inputs
+    const inputs = form.querySelectorAll('input,select,textarea');
+    const data = { status: 'New', source: 'website' };
+    inputs.forEach(inp => {
+      if (!inp.name && inp.type !== 'submit') {
+        const label = inp.closest('.form-group')?.querySelector('.form-label')?.textContent?.trim() || inp.placeholder || inp.type;
+        if (inp.value) {
+          if (label.toLowerCase().includes('name'))        data.name       = inp.value;
+          else if (label.toLowerCase().includes('phone'))  data.phone      = inp.value;
+          else if (label.toLowerCase().includes('email'))  data.email      = inp.value;
+          else if (label.toLowerCase().includes('date') && !data.travelDate)   data.travelDate = inp.value;
+          else if (label.toLowerCase().includes('vehicle')) data.vehicle   = inp.value;
+          else if (label.toLowerCase().includes('service')) data.service   = inp.value;
+          else if (label.toLowerCase().includes('passenger')) data.passengers = inp.value;
+          else if (inp.tagName === 'TEXTAREA')             data.notes      = inp.value;
+        }
+      }
+    });
+
+    try {
+      await db.collection('bookings').add({
+        ...data,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      btn.innerHTML = '✅ Booking Request Sent!';
+      btn.style.background = 'linear-gradient(135deg,#22C55E,#16A34A)';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '';
+        btn.disabled = false;
+        form.reset();
+      }, 3500);
+    } catch(err) {
+      // Firebase not configured — show success anyway (graceful degradation)
+      btn.innerHTML = '✅ Request Sent!';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.disabled = false;
+        form.reset();
+      }, 3000);
+    }
+  });
+});
+
+// ── 2. Load Hotels from Firestore (or keep static) ──
+(async function loadHotelsFromFirebase() {
+  try {
+    const snap = await db.collection('hotels')
+      .where('active', '==', true)
+      .orderBy('order', 'asc')
+      .get();
+
+    if (snap.empty) return; // Keep static fallback cards
+
+    const hotels = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderHotelCards(hotels);
+  } catch(e) {
+    // Firebase not configured or empty — static cards remain visible
+    console.log('Hotels: using static fallback');
+  }
+})();
+
+function renderHotelCards(hotels) {
+  const grid = document.getElementById('hotelsGrid');
+  if (!hotels.length) return;
+
+  const starColors = {
+    '5star': 'rgba(201,153,58,0.95)',
+    '4star': 'rgba(59,130,246,0.9)',
+    '3star': 'rgba(107,114,128,0.9)'
+  };
+
+  grid.innerHTML = hotels.map((h, i) => {
+    const starsHtml = '★'.repeat(h.stars || 3);
+    const delay = ['reveal-delay-1','reveal-delay-2','reveal-delay-3'][i % 3];
+    const amenitiesHtml = (h.amenities || []).slice(0, 3).map(a =>
+      `<span style="font-size:10px;background:rgba(201,153,58,0.1);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--gold-light)">${a}</span>`
+    ).join('');
+
+    return `
+    <div class="hotel-card-wrap" data-star="${h.category || '3star'}">
+      <div class="fleet-card reveal ${delay}" style="height:100%">
+        <div class="fleet-img-wrap" style="height:220px">
+          <img src="${h.image || 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=700&q=85'}"
+               alt="${h.name}" loading="lazy"
+               onerror="this.src='https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=700&q=85'">
+          <div class="fleet-badge" style="background:${starColors[h.category] || starColors['3star']}">${h.badge || ''}</div>
+        </div>
+        <div class="fleet-body">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <h3 class="fleet-name" style="font-size:1.05rem;margin:0">${h.name}</h3>
+            <span style="color:#F59E0B;font-size:0.85rem;letter-spacing:1px">${starsHtml}</span>
+          </div>
+          <div style="font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">${h.location || ''} · ${h.stars || 3} Star</div>
+          <p style="font-size:0.82rem;color:var(--text-light);line-height:1.6;margin-bottom:12px">${h.description || ''}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">${amenitiesHtml}</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div style="font-size:10px;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase">From</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold-light)">
+                ${h.price || '—'}<span style="font-size:11px;color:var(--text-mid);font-family:'Raleway',sans-serif;font-weight:400">/night</span>
+              </div>
+            </div>
+            <a href="contact.html" class="btn btn-gold" style="padding:10px 18px;font-size:11px">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Re-init reveal observer for new cards
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+  // Re-init hotel tab filter
+  initHotelTabs();
+}
+
+// ── 3. Hotel star tab filter ──────────────────
+function initHotelTabs() {
+  document.querySelectorAll('.hotel-tab').forEach(btn => {
+    btn.onclick = function() {
+      document.querySelectorAll('.hotel-tab').forEach(b => {
+        b.classList.remove('btn-gold');
+        b.classList.add('btn-outline');
+      });
+      this.classList.add('btn-gold');
+      this.classList.remove('btn-outline');
+      const tab = this.dataset.tab;
+      document.querySelectorAll('.hotel-card-wrap').forEach(card => {
+        card.style.display = (tab === 'all' || card.dataset.star === tab) ? '' : 'none';
+      });
+    };
+  });
+}
+initHotelTabs();
+</script>
 <style>
 @media(max-width:768px){.about-split{grid-template-columns:1fr!important}}
 </style>

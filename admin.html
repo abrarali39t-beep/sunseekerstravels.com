@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | Sun Seekers Travels</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+/* ── Variables ── */
+:root {
+  --navy:      #0A1628;
+  --navy-mid:  #112240;
+  --navy-light:#1a3357;
+  --gold:      #C9993A;
+  --gold-light:#E2B96A;
+  --white:     #FFFFFF;
+  --text-light:#B0BECC;
+  --text-mid:  #7A8FA6;
+  --border:    rgba(201,153,58,0.2);
+  --danger:    #EF4444;
+  --success:   #22C55E;
+  --warning:   #F59E0B;
+  --info:      #3B82F6;
+  --radius:    6px;
+  --sidebar-w: 260px;
+  --tr: .25s ease;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Raleway',sans-serif;background:var(--navy);color:var(--white);line-height:1.6}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--navy)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+button{cursor:pointer;font-family:inherit}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+
+/* ── LOGIN SCREEN ── */
+#loginScreen {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  background: radial-gradient(ellipse at top left, #1a3357 0%, #0A1628 60%);
+  padding:20px;
+}
+.login-card {
+  background:var(--navy-mid);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:48px 44px;
+  width:100%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);
+}
+.login-logo { font-size:3rem; margin-bottom:12px; }
+.login-title {
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  font-weight:700;
+  margin-bottom:4px;
+}
+.login-sub { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:36px; }
+.login-form { display:flex; flex-direction:column; gap:16px; text-align:left; }
+.login-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; display:block; }
+.login-input {
+  width:100%; background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:var(--radius); padding:14px 18px; font-family:'Raleway',sans-serif;
+  font-size:0.95rem; color:var(--white); outline:none; transition:var(--tr);
+}
+.login-input:focus { border-color:var(--gold); background:rgba(201,153,58,0.05); }
+.login-input::placeholder { color:var(--text-mid); }
+.login-btn {
+  width:100%; padding:15px; background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--navy); border:none; border-radius:var(--radius); font-weight:700; font-size:13px;
+  letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; margin-top:8px; transition:var(--tr);
+}
+.login-btn:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(201,153,58,0.4); }
+.login-err { color:var(--danger); font-size:0.85rem; text-align:center; display:none; margin-top:4px; }
+
+/* ── ADMIN LAYOUT ── */
+#adminApp { display:none; height:100vh; overflow:hidden; flex-direction:row; }
+
+/* SIDEBAR */
+.sidebar {
+  width:var(--sidebar-w);
+  background:#060F1C;
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  flex-shrink:0;
+  overflow-y:auto;
+}
+.sidebar-logo {
+  padding:24px 20px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.sidebar-logo-icon { font-size:1.6rem; }
+.sidebar-logo-name { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; line-height:1.1; }
+.sidebar-logo-sub  { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); }
+.sidebar-section-label {
+  font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color:var(--text-mid); padding:20px 20px 8px;
+}
+.sidebar-nav { display:flex; flex-direction:column; gap:2px; padding:0 12px; }
+.nav-item {
+  display:flex; align-items:center; gap:12px; padding:11px 14px;
+  border-radius:var(--radius); cursor:pointer; transition:var(--tr);
+  font-size:0.875rem; font-weight:500; color:var(--text-light);
+  border:none; background:none; width:100%; text-align:left;
+}
+.nav-item:hover { background:rgba(255,255,255,0.05); color:var(--white); }
+.nav-item.active { background:rgba(201,153,58,0.12); color:var(--white); border-left:2px solid var(--gold); }
+.nav-item .nav-icon { font-size:1.1rem; width:22px; text-align:center; }
+.nav-item .nav-badge {
+  margin-left:auto; background:var(--gold); color:var(--navy);
+  font-size:9px; font-weight:700; padding:2px 8px; border-radius:20px;
+}
+.sidebar-footer {
+  margin-top:auto; padding:16px; border-top:1px solid var(--border);
+}
+.logout-btn {
+  width:100%; padding:11px 14px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3);
+  color:#EF4444; border-radius:var(--radius); font-family:'Raleway',sans-serif; font-size:0.85rem;
+  font-weight:600; cursor:pointer; transition:var(--tr); display:flex; align-items:center; gap:8px; justify-content:center;
+}
+.logout-btn:hover { background:rgba(239,68,68,0.2); }
+
+/* MAIN */
+.main-area { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+.topbar {
+  background:var(--navy-mid); border-bottom:1px solid var(--border);
+  padding:0 28px; height:64px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
+}
+.topbar-title { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; }
+.topbar-right { display:flex; align-items:center; gap:12px; }
+.topbar-user { font-size:0.85rem; color:var(--text-light); }
+.topbar-avatar {
+  width:36px; height:36px; border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--navy-light));
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.85rem; font-weight:700; color:var(--navy);
+}
+
+.content-area { flex:1; overflow-y:auto; padding:28px; }
+
+/* PANELS */
+.panel { display:none; }
+.panel.active { display:block; }
+
+/* STAT CARDS */
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:28px; }
+.stat-card {
+  background:var(--navy-mid); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px 22px; display:flex; align-items:center; gap:16px; transition:var(--tr);
+}
+.stat-card:hover { border-color:var(--gold); transform:translateY(-2px); }
+.stat-icon { font-size:1.8rem; width:48px; text-align:center; }
+.stat-val { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; line-height:1; }
+.stat-label { font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--text-mid); margin-top:4px; }
+
+/* SECTION HEADER */
+.section-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:20px; flex-wrap:wrap; gap:12px;
+}
+.section-header h2 { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; }
+.section-actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+/* BUTTONS */
+.btn { display:inline-flex; align-items:center; gap:7px; padding:10px 20px; border-radius:var(--radius); font-family:'Raleway',sans-serif; font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; cursor:pointer; border:none; transition:var(--tr); }
+.btn-gold  { background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:var(--navy); }
+.btn-gold:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(201,153,58,0.4); }
+.btn-outline { border:1.5px solid var(--gold); color:var(--gold); background:transparent; }
+.btn-outline:hover { background:rgba(201,153,58,0.1); }
+.btn-danger { background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.4); color:#EF4444; padding:7px 14px; font-size:11px; }
+.btn-danger:hover { background:rgba(239,68,68,0.25); }
+.btn-edit  { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.4); color:#60A5FA; padding:7px 14px; font-size:11px; }
+.btn-edit:hover  { background:rgba(59,130,246,0.25); }
+.btn-success { background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.4); color:#4ADE80; padding:7px 14px; font-size:11px; }
+.btn-sm { padding:7px 14px; font-size:11px; }
+
+/* SEARCH & FILTER */
+.table-controls { display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; align-items:center; }
+.search-input {
+  background:var(--navy-mid); border:1px solid var(--border); border-radius:var(--radius);
+  padding:10px 16px 10px 38px; font-family:'Raleway',sans-serif; font-size:0.875rem;
+  color:var(--white); outline:none; transition:var(--tr); width:240px; position:relative;
+}
+.search-wrap { position:relative; }
+.search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; pointer-events:none; color:var(--text-mid); }
+.search-input:focus { border-color:var(--gold); }
+.search-input::placeholder { color:var(--text-mid); }
+.filter-select {
+  background:var(--navy-mid); border:1px solid var(--border); border-radius:var(--radius);
+  padding:10px 16px; font-family:'Raleway',sans-serif; font-size:0.875rem; color:var(--white); outline:none; cursor:pointer;
+}
+.filter-select option { background:var(--navy-mid); }
+
+/* DATA TABLE */
+.data-table-wrap { background:var(--navy-mid); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.data-table { width:100%; border-collapse:collapse; }
+.data-table th {
+  padding:13px 16px; text-align:left; font-size:10px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; color:var(--gold);
+  background:rgba(201,153,58,0.06); border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+.data-table td { padding:14px 16px; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.875rem; vertical-align:middle; }
+.data-table tr:last-child td { border-bottom:none; }
+.data-table tr:hover td { background:rgba(255,255,255,0.02); }
+.td-img { width:64px; height:48px; object-fit:cover; border-radius:4px; border:1px solid var(--border); }
+.td-actions { display:flex; gap:6px; flex-wrap:wrap; }
+.badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:10px; font-weight:700; letter-spacing:0.5px; }
+.badge-green { background:rgba(34,197,94,0.15); color:#4ADE80; border:1px solid rgba(34,197,94,0.3); }
+.badge-red   { background:rgba(239,68,68,0.15);  color:#F87171; border:1px solid rgba(239,68,68,0.3); }
+.badge-gold  { background:rgba(201,153,58,0.15); color:var(--gold-light); border:1px solid rgba(201,153,58,0.3); }
+.badge-blue  { background:rgba(59,130,246,0.15); color:#60A5FA; border:1px solid rgba(59,130,246,0.3); }
+.stars-display { color:#F59E0B; letter-spacing:1px; }
+.no-data { text-align:center; padding:48px; color:var(--text-mid); font-size:0.9rem; }
+
+/* MODAL */
+.modal-overlay {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(4px); z-index:2000; align-items:center; justify-content:center; padding:20px;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--navy-mid); border:1px solid var(--border); border-radius:10px;
+  width:100%; max-width:660px; max-height:90vh; overflow-y:auto;
+  box-shadow:0 30px 80px rgba(0,0,0,0.6);
+}
+.modal-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:22px 28px; border-bottom:1px solid var(--border); position:sticky; top:0;
+  background:var(--navy-mid); z-index:1;
+}
+.modal-title { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; }
+.modal-close { background:none; border:none; color:var(--text-mid); font-size:1.4rem; cursor:pointer; transition:var(--tr); line-height:1; }
+.modal-close:hover { color:var(--white); transform:scale(1.1); }
+.modal-body { padding:28px; display:flex; flex-direction:column; gap:18px; }
+.modal-footer { padding:18px 28px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:12px; }
+
+/* FORM ELEMENTS */
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-group { display:flex; flex-direction:column; gap:7px; }
+.form-group.full { grid-column:span 2; }
+.form-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); }
+.form-input, .form-select, .form-textarea {
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
+  border-radius:var(--radius); padding:11px 14px; font-family:'Raleway',sans-serif;
+  font-size:0.875rem; color:var(--white); outline:none; transition:var(--tr); width:100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color:var(--gold); background:rgba(201,153,58,0.04);
+}
+.form-select option { background:var(--navy-mid); }
+.form-textarea { resize:vertical; min-height:90px; }
+.form-input::placeholder, .form-textarea::placeholder { color:var(--text-mid); }
+.img-preview { width:100%; height:130px; object-fit:cover; border-radius:var(--radius); border:1px solid var(--border); display:none; margin-top:8px; }
+.toggle-wrap { display:flex; align-items:center; gap:10px; }
+.toggle { position:relative; width:44px; height:24px; }
+.toggle input { opacity:0; width:0; height:0; }
+.toggle-slider {
+  position:absolute; inset:0; background:rgba(255,255,255,0.1); border-radius:24px;
+  cursor:pointer; transition:var(--tr); border:1px solid rgba(255,255,255,0.15);
+}
+.toggle-slider::before {
+  content:''; position:absolute; width:18px; height:18px; background:#fff;
+  border-radius:50%; left:2px; top:2px; transition:var(--tr);
+}
+.toggle input:checked + .toggle-slider { background:var(--gold); border-color:var(--gold); }
+.toggle input:checked + .toggle-slider::before { transform:translateX(20px); }
+.toggle-label { font-size:0.875rem; color:var(--text-light); }
+
+/* TOAST */
+.toast-container { position:fixed; top:20px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:10px; }
+.toast {
+  background:var(--navy-mid); border-left:3px solid var(--success); border-radius:var(--radius);
+  padding:14px 20px; min-width:280px; max-width:340px; display:flex; align-items:center; gap:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.4); animation:slideIn .3s ease;
+  font-size:0.875rem;
+}
+.toast.error  { border-left-color:var(--danger); }
+.toast.warning{ border-left-color:var(--warning); }
+@keyframes slideIn { from{transform:translateX(120%);opacity:0} to{transform:translateX(0);opacity:1} }
+@keyframes slideOut{ from{transform:translateX(0);opacity:1} to{transform:translateX(120%);opacity:0} }
+
+/* BOOKINGS TABLE extra */
+.booking-new td { background:rgba(201,153,58,0.04); }
+
+/* SETTINGS */
+.settings-card { background:var(--navy-mid); border:1px solid var(--border); border-radius:var(--radius); padding:28px; margin-bottom:20px; }
+.settings-card-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  .sidebar { width:220px; }
+  .stats-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:680px) {
+  #adminApp { flex-direction:column; }
+  .sidebar { width:100%; height:auto; max-height:56px; overflow:hidden; transition:max-height .3s ease; }
+  .sidebar.mobile-open { max-height:100vh; }
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .form-group.full { grid-column:span 1; }
+  .data-table { display:block; overflow-x:auto; }
+}
+
+/* DASHBOARD QUICK ACTIONS */
+.quick-actions { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px; }
+.quick-card {
+  background:var(--navy-mid); border:1px solid var(--border); border-radius:var(--radius);
+  padding:18px; display:flex; align-items:center; gap:14px; cursor:pointer;
+  transition:var(--tr); text-decoration:none; color:inherit;
+}
+.quick-card:hover { border-color:var(--gold); transform:translateY(-2px); }
+.quick-card-icon { font-size:1.6rem; }
+.quick-card-title { font-weight:700; font-size:0.9rem; }
+.quick-card-sub   { font-size:11px; color:var(--text-mid); margin-top:2px; }
+
+/* RECENT TABLE on dashboard */
+.recent-section { background:var(--navy-mid); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.recent-header { padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.recent-title { font-weight:700; font-size:0.95rem; }
+
+/* STATUS select */
+.status-select {
+  background:transparent; border:1px solid var(--border); border-radius:4px;
+  color:var(--white); font-size:11px; padding:4px 8px; cursor:pointer; outline:none;
+}
+.status-select option { background:var(--navy-mid); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ LOGIN SCREEN ═══════════════ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">☀️</div>
+    <h1 class="login-title">Sun Seekers Travels</h1>
+    <p class="login-sub">Admin Panel</p>
+    <form class="login-form" id="loginForm">
+      <div>
+        <label class="login-label">Email Address</label>
+        <input type="email" class="login-input" id="loginEmail" placeholder="admin@sunseekerstravels.com" required>
+      </div>
+      <div>
+        <label class="login-label">Password</label>
+        <input type="password" class="login-input" id="loginPass" placeholder="••••••••••" required>
+      </div>
+      <p class="login-err" id="loginErr">Invalid credentials. Please try again.</p>
+      <button type="submit" class="login-btn" id="loginBtn">🔐 &nbsp;Login to Admin</button>
+    </form>
+    <p style="margin-top:20px;font-size:11px;color:var(--text-mid)">
+      Authorized personnel only.<br>
+      <a href="index.html" style="color:var(--gold)">← Back to Website</a>
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════ ADMIN APP ═══════════════ -->
+<div id="adminApp">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-icon">☀️</span>
+      <div>
+        <div class="sidebar-logo-name">Sun Seekers</div>
+        <div class="sidebar-logo-sub">Admin Panel</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">Main</div>
+    <div class="sidebar-nav">
+      <button class="nav-item active" data-panel="dashboard">
+        <span class="nav-icon">📊</span> Dashboard
+      </button>
+      <button class="nav-item" data-panel="hotels">
+        <span class="nav-icon">🏨</span> Hotels
+        <span class="nav-badge" id="hotelsBadge">0</span>
+      </button>
+      <button class="nav-item" data-panel="fleet">
+        <span class="nav-icon">🚗</span> Fleet
+        <span class="nav-badge" id="fleetBadge">0</span>
+      </button>
+      <button class="nav-item" data-panel="packages">
+        <span class="nav-icon">🗺️</span> Packages
+        <span class="nav-badge" id="pkgBadge">0</span>
+      </button>
+      <button class="nav-item" data-panel="testimonials">
+        <span class="nav-icon">⭐</span> Testimonials
+      </button>
+    </div>
+
+    <div class="sidebar-section-label">Operations</div>
+    <div class="sidebar-nav">
+      <button class="nav-item" data-panel="bookings">
+        <span class="nav-icon">📋</span> Bookings
+        <span class="nav-badge" id="bookingsBadge" style="background:var(--danger);color:#fff">0</span>
+      </button>
+      <button class="nav-item" data-panel="gallery">
+        <span class="nav-icon">🖼️</span> Gallery
+      </button>
+    </div>
+
+    <div class="sidebar-section-label">System</div>
+    <div class="sidebar-nav">
+      <button class="nav-item" data-panel="settings">
+        <span class="nav-icon">⚙️</span> Settings
+      </button>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">🚪 &nbsp;Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-area">
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-right">
+        <a href="index.html" target="_blank" style="font-size:12px;color:var(--gold)">🌐 View Site</a>
+        <span class="topbar-user" id="topbarUser">Loading…</span>
+        <div class="topbar-avatar" id="topbarAvatar">A</div>
+      </div>
+    </div>
+
+    <div class="content-area">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="stats-grid" id="dashStats">
+          <div class="stat-card"><span class="stat-icon">🏨</span><div><div class="stat-val" id="dHotels">–</div><div class="stat-label">Hotels Listed</div></div></div>
+          <div class="stat-card"><span class="stat-icon">🚗</span><div><div class="stat-val" id="dFleet">–</div><div class="stat-label">Fleet Vehicles</div></div></div>
+          <div class="stat-card"><span class="stat-icon">🗺️</span><div><div class="stat-val" id="dPkgs">–</div><div class="stat-label">Tour Packages</div></div></div>
+          <div class="stat-card"><span class="stat-icon">📋</span><div><div class="stat-val" id="dBookings">–</div><div class="stat-label">Total Bookings</div></div></div>
+        </div>
+        <div class="quick-actions">
+          <div class="quick-card" onclick="switchPanel('hotels')"><span class="quick-card-icon">🏨</span><div><div class="quick-card-title">Manage Hotels</div><div class="quick-card-sub">Add, edit, or remove hotels</div></div></div>
+          <div class="quick-card" onclick="switchPanel('fleet')"><span class="quick-card-icon">🚗</span><div><div class="quick-card-title">Manage Fleet</div><div class="quick-card-sub">Update vehicle listings</div></div></div>
+          <div class="quick-card" onclick="switchPanel('bookings')"><span class="quick-card-icon">📋</span><div><div class="quick-card-title">View Bookings</div><div class="quick-card-sub">See latest enquiries</div></div></div>
+        </div>
+        <div class="recent-section">
+          <div class="recent-header">
+            <span class="recent-title">📋 Recent Bookings</span>
+            <button class="btn btn-outline btn-sm" onclick="switchPanel('bookings')">View All</button>
+          </div>
+          <table class="data-table" id="recentBookingsTable">
+            <thead><tr><th>Name</th><th>Phone</th><th>Vehicle</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody id="recentBookingsBody"><tr><td colspan="5" class="no-data">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── HOTELS ── -->
+      <div class="panel" id="panel-hotels">
+        <div class="section-header">
+          <h2>🏨 Hotel Management</h2>
+          <div class="section-actions">
+            <button class="btn btn-gold" onclick="openModal('hotel')">+ Add Hotel</button>
+          </div>
+        </div>
+        <div class="table-controls">
+          <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" class="search-input" placeholder="Search hotels…" oninput="filterTable('hotelsTable', this.value)"></div>
+          <select class="filter-select" onchange="filterByCategory('hotelsTable', this.value, 4)">
+            <option value="">All Stars</option>
+            <option value="5star">⭐⭐⭐⭐⭐ 5 Star</option>
+            <option value="4star">⭐⭐⭐⭐ 4 Star</option>
+            <option value="3star">⭐⭐⭐ 3 Star</option>
+          </select>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table" id="hotelsTable">
+            <thead><tr><th>Image</th><th>Name</th><th>Stars</th><th>Location</th><th>Price/Night</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="hotelsBody"><tr><td colspan="7" class="no-data">Loading hotels…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── FLEET ── -->
+      <div class="panel" id="panel-fleet">
+        <div class="section-header">
+          <h2>🚗 Fleet Management</h2>
+          <div class="section-actions">
+            <button class="btn btn-gold" onclick="openModal('fleet')">+ Add Vehicle</button>
+          </div>
+        </div>
+        <div class="table-controls">
+          <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" class="search-input" placeholder="Search vehicles…" oninput="filterTable('fleetTable', this.value)"></div>
+          <select class="filter-select" onchange="filterByCategory('fleetTable', this.value, 3)">
+            <option value="">All Types</option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Van">Van / Minibus</option>
+            <option value="Bus">Bus</option>
+          </select>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table" id="fleetTable">
+            <thead><tr><th>Image</th><th>Vehicle Name</th><th>Category</th><th>Seats</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="fleetBody"><tr><td colspan="6" class="no-data">Loading fleet…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── PACKAGES ── -->
+      <div class="panel" id="panel-packages">
+        <div class="section-header">
+          <h2>🗺️ Tour Packages</h2>
+          <div class="section-actions">
+            <button class="btn btn-gold" onclick="openModal('package')">+ Add Package</button>
+          </div>
+        </div>
+        <div class="table-controls">
+          <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" class="search-input" placeholder="Search packages…" oninput="filterTable('pkgsTable', this.value)"></div>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table" id="pkgsTable">
+            <thead><tr><th>Image</th><th>Package Name</th><th>Duration</th><th>Price From</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="pkgsBody"><tr><td colspan="6" class="no-data">Loading packages…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── TESTIMONIALS ── -->
+      <div class="panel" id="panel-testimonials">
+        <div class="section-header">
+          <h2>⭐ Testimonials</h2>
+          <div class="section-actions">
+            <button class="btn btn-gold" onclick="openModal('testimonial')">+ Add Review</button>
+          </div>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table" id="testimonialsTable">
+            <thead><tr><th>Name</th><th>Location</th><th>Stars</th><th>Review (preview)</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="testimonialsBody"><tr><td colspan="6" class="no-data">Loading testimonials…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── BOOKINGS ── -->
+      <div class="panel" id="panel-bookings">
+        <div class="section-header">
+          <h2>📋 Booking Enquiries</h2>
+          <div class="section-actions">
+            <select class="filter-select" onchange="filterByCategory('bookingsTable', this.value, 6)">
+              <option value="">All Status</option>
+              <option value="New">🔵 New</option>
+              <option value="Confirmed">🟢 Confirmed</option>
+              <option value="Completed">⚫ Completed</option>
+              <option value="Cancelled">🔴 Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table" id="bookingsTable">
+            <thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Vehicle</th><th>Travel Date</th><th>Service</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="bookingsBody"><tr><td colspan="8" class="no-data">Loading bookings…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── GALLERY ── -->
+      <div class="panel" id="panel-gallery">
+        <div class="section-header">
+          <h2>🖼️ Gallery Management</h2>
+          <button class="btn btn-gold" onclick="openModal('gallery')">+ Add Photo</button>
+        </div>
+        <div id="galleryAdminGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px"></div>
+      </div>
+
+      <!-- ── SETTINGS ── -->
+      <div class="panel" id="panel-settings">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:24px">⚙️ Site Settings</h2>
+
+        <div class="settings-card">
+          <div class="settings-card-title">🏢 Business Information</div>
+          <form class="form-row" id="bizForm" style="gap:16px">
+            <div class="form-group"><label class="form-label">Business Name</label><input type="text" class="form-input" id="sName" value="Sun Seekers Travels"></div>
+            <div class="form-group"><label class="form-label">Tagline</label><input type="text" class="form-input" id="sTagline" value="Kashmir's Premier Travel Company"></div>
+            <div class="form-group"><label class="form-label">Phone 1</label><input type="text" class="form-input" id="sPhone1" value="+91 6005868858"></div>
+            <div class="form-group"><label class="form-label">Phone 2</label><input type="text" class="form-input" id="sPhone2" value="+91 7006567457"></div>
+            <div class="form-group full"><label class="form-label">Email</label><input type="email" class="form-input" id="sEmail" value="sunseekerstravels1@gmail.com"></div>
+            <div class="form-group full"><label class="form-label">Address</label><input type="text" class="form-input" id="sAddress" value="Zia Complex, Soura, Srinagar, Jammu & Kashmir — 190011"></div>
+            <div class="form-group full" style="margin-top:8px">
+              <button type="button" class="btn btn-gold" onclick="saveSettings()">💾 Save Settings</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-card-title">🔐 Change Admin Password</div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-input" id="newPass" placeholder="Min 6 characters"></div>
+            <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" class="form-input" id="confirmPass" placeholder="Repeat password"></div>
+          </div>
+          <button class="btn btn-gold btn-sm" style="margin-top:16px" onclick="changePassword()">🔒 Update Password</button>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-card-title">🌱 Data Management</div>
+          <p style="font-size:0.875rem;color:var(--text-light);margin-bottom:16px">Seed default content to Firestore if collections are empty.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-outline" onclick="seedDefaultHotels()">🏨 Seed Default Hotels</button>
+            <button class="btn btn-outline" onclick="seedDefaultFleet()">🚗 Seed Default Fleet</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end content-area -->
+  </div><!-- end main-area -->
+</div><!-- end adminApp -->
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+
+<!-- HOTEL MODAL -->
+<div class="modal-overlay" id="hotelModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="hotelModalTitle">Add Hotel</h3>
+      <button class="modal-close" onclick="closeModal('hotelModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="hotelId">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Hotel Name *</label><input type="text" class="form-input" id="hotelName" placeholder="e.g. The LaLiT Grand Palace" required></div>
+        <div class="form-group"><label class="form-label">Star Rating *</label>
+          <select class="form-select" id="hotelStars">
+            <option value="5">⭐⭐⭐⭐⭐ 5 Star</option>
+            <option value="4">⭐⭐⭐⭐ 4 Star</option>
+            <option value="3" selected>⭐⭐⭐ 3 Star</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Location</label><input type="text" class="form-input" id="hotelLocation" placeholder="e.g. Dal Lake, Srinagar"></div>
+        <div class="form-group"><label class="form-label">Price Per Night</label><input type="text" class="form-input" id="hotelPrice" placeholder="e.g. ₹5,500"></div>
+        <div class="form-group"><label class="form-label">Badge Label</label><input type="text" class="form-input" id="hotelBadge" placeholder="e.g. Luxury, Popular, New"></div>
+        <div class="form-group"><label class="form-label">Display Order</label><input type="number" class="form-input" id="hotelOrder" value="10" min="1"></div>
+        <div class="form-group full"><label class="form-label">Description *</label><textarea class="form-textarea" id="hotelDesc" placeholder="Describe the hotel, ambience, USP…"></textarea></div>
+        <div class="form-group full">
+          <label class="form-label">Image URL (Unsplash or direct link)</label>
+          <input type="url" class="form-input" id="hotelImg" placeholder="https://images.unsplash.com/…" oninput="previewImg(this,'hotelImgPreview')">
+          <img id="hotelImgPreview" class="img-preview" alt="Preview">
+        </div>
+        <div class="form-group full"><label class="form-label">Amenities (comma-separated)</label><input type="text" class="form-input" id="hotelAmenities" placeholder="Dal Lake View, Spa, Free Wi-Fi, Parking"></div>
+        <div class="form-group full">
+          <div class="toggle-wrap">
+            <label class="toggle"><input type="checkbox" id="hotelActive" checked><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Active (visible on website)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('hotelModal')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveHotel()">💾 Save Hotel</button>
+    </div>
+  </div>
+</div>
+
+<!-- FLEET MODAL -->
+<div class="modal-overlay" id="fleetModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="fleetModalTitle">Add Vehicle</h3>
+      <button class="modal-close" onclick="closeModal('fleetModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="fleetId">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Vehicle Name *</label><input type="text" class="form-input" id="fleetName" placeholder="e.g. Toyota Innova Crysta"></div>
+        <div class="form-group"><label class="form-label">Category</label>
+          <select class="form-select" id="fleetCategory">
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Van">Van / Minibus</option>
+            <option value="Bus">Bus</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Seating Capacity</label><input type="text" class="form-input" id="fleetSeats" placeholder="e.g. 7" ></div>
+        <div class="form-group"><label class="form-label">Badge Label</label><input type="text" class="form-input" id="fleetBadge" placeholder="e.g. SUV, Luxury SUV"></div>
+        <div class="form-group"><label class="form-label">Features (comma-separated)</label><input type="text" class="form-input" id="fleetFeatures" placeholder="AC, GPS, Music System"></div>
+        <div class="form-group"><label class="form-label">Display Order</label><input type="number" class="form-input" id="fleetOrder" value="10" min="1"></div>
+        <div class="form-group full"><label class="form-label">Description</label><textarea class="form-textarea" id="fleetDesc" placeholder="Describe the vehicle…" style="min-height:70px"></textarea></div>
+        <div class="form-group full">
+          <label class="form-label">Image URL</label>
+          <input type="url" class="form-input" id="fleetImg" placeholder="https://images.unsplash.com/…" oninput="previewImg(this,'fleetImgPreview')">
+          <img id="fleetImgPreview" class="img-preview" alt="Preview">
+        </div>
+        <div class="form-group full">
+          <div class="toggle-wrap">
+            <label class="toggle"><input type="checkbox" id="fleetActive" checked><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Active (visible on website)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('fleetModal')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveFleet()">💾 Save Vehicle</button>
+    </div>
+  </div>
+</div>
+
+<!-- PACKAGE MODAL -->
+<div class="modal-overlay" id="packageModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="pkgModalTitle">Add Tour Package</h3>
+      <button class="modal-close" onclick="closeModal('packageModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pkgId">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Package Name *</label><input type="text" class="form-input" id="pkgName" placeholder="e.g. Classic Kashmir 3 Days"></div>
+        <div class="form-group"><label class="form-label">Duration</label><input type="text" class="form-input" id="pkgDuration" placeholder="e.g. 3 Days / 2 Nights"></div>
+        <div class="form-group"><label class="form-label">Price From</label><input type="text" class="form-input" id="pkgPrice" placeholder="e.g. ₹8,999"></div>
+        <div class="form-group"><label class="form-label">Category</label>
+          <select class="form-select" id="pkgCategory">
+            <option value="short">Short (1–3 days)</option>
+            <option value="medium">Medium (4–5 days)</option>
+            <option value="long">Long (6+ days)</option>
+            <option value="honeymoon">Honeymoon</option>
+            <option value="winter">Winter Special</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Tagline</label><input type="text" class="form-input" id="pkgTagline" placeholder="e.g. Dal Lake, Gardens & Old City"></div>
+        <div class="form-group"><label class="form-label">Badge Label</label><input type="text" class="form-input" id="pkgBadge" placeholder="e.g. Best Seller, Honeymoon"></div>
+        <div class="form-group full"><label class="form-label">Highlights (one per line)</label><textarea class="form-textarea" id="pkgHighlights" placeholder="Shikara ride on Dal Lake&#10;Gulmarg gondola&#10;Pahalgam Betaab Valley"></textarea></div>
+        <div class="form-group full">
+          <label class="form-label">Image URL</label>
+          <input type="url" class="form-input" id="pkgImg" placeholder="https://images.unsplash.com/…" oninput="previewImg(this,'pkgImgPreview')">
+          <img id="pkgImgPreview" class="img-preview" alt="Preview">
+        </div>
+        <div class="form-group full">
+          <div class="toggle-wrap">
+            <label class="toggle"><input type="checkbox" id="pkgActive" checked><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Active (visible on website)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('packageModal')">Cancel</button>
+      <button class="btn btn-gold" onclick="savePackage()">💾 Save Package</button>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL MODAL -->
+<div class="modal-overlay" id="testimonialModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="testModalTitle">Add Testimonial</h3>
+      <button class="modal-close" onclick="closeModal('testimonialModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="testId">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Customer Name *</label><input type="text" class="form-input" id="testName" placeholder="e.g. Rahul Kumar"></div>
+        <div class="form-group"><label class="form-label">Location</label><input type="text" class="form-input" id="testLocation" placeholder="e.g. Delhi, India 🇮🇳"></div>
+        <div class="form-group"><label class="form-label">Star Rating</label>
+          <select class="form-select" id="testStars">
+            <option value="5" selected>★★★★★ 5 Stars</option>
+            <option value="4">★★★★ 4 Stars</option>
+            <option value="3">★★★ 3 Stars</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Avatar Initials</label><input type="text" class="form-input" id="testInitials" placeholder="e.g. RK" maxlength="3"></div>
+        <div class="form-group full"><label class="form-label">Review Text *</label><textarea class="form-textarea" id="testReview" placeholder="Write the customer review here…" style="min-height:100px"></textarea></div>
+        <div class="form-group full">
+          <div class="toggle-wrap">
+            <label class="toggle"><input type="checkbox" id="testActive" checked><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Active (visible on website)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('testimonialModal')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveTestimonial()">💾 Save Review</button>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY MODAL -->
+<div class="modal-overlay" id="galleryModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <h3 class="modal-title">Add Gallery Photo</h3>
+      <button class="modal-close" onclick="closeModal('galleryModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="galleryId">
+      <div class="form-group"><label class="form-label">Photo Label</label><input type="text" class="form-input" id="galleryLabel" placeholder="e.g. Dal Lake at Sunrise"></div>
+      <div class="form-group"><label class="form-label">Category</label>
+        <select class="form-select" id="galleryCategory">
+          <option value="landscapes">Landscapes</option>
+          <option value="destinations">Destinations</option>
+          <option value="travel">Travel Moments</option>
+          <option value="seasons">Seasons</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Image URL</label>
+        <input type="url" class="form-input" id="galleryImg" placeholder="https://images.unsplash.com/…" oninput="previewImg(this,'galleryImgPreview')">
+        <img id="galleryImgPreview" class="img-preview" alt="Preview">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('galleryModal')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveGalleryItem()">💾 Add Photo</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM DELETE MODAL -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <h3 class="modal-title">Confirm Delete</h3>
+      <button class="modal-close" onclick="closeModal('confirmModal')">✕</button>
+    </div>
+    <div class="modal-body" style="gap:10px">
+      <p style="color:var(--text-light);font-size:0.95rem">Are you sure you want to delete this item? This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('confirmModal')">Cancel</button>
+      <button class="btn btn-danger" style="padding:10px 22px;font-size:12px" id="confirmDeleteBtn">🗑️ Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<!-- Firebase SDKs (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+
+<script>
+// ════════════════════════════════════════════════
+//  ADMIN PANEL — MAIN SCRIPT
+// ════════════════════════════════════════════════
+
+// State
+let currentUser = null;
+let deleteCallback = null;
+
+// ── AUTH ──────────────────────────────────────
+auth.onAuthStateChanged(user => {
+  if (user) {
+    currentUser = user;
+    showAdmin(user);
+  } else {
+    showLogin();
+  }
+});
+
+document.getElementById('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  const err = document.getElementById('loginErr');
+  btn.textContent = '⏳ Signing in…';
+  btn.disabled = true;
+  err.style.display = 'none';
+  try {
+    await auth.signInWithEmailAndPassword(
+      document.getElementById('loginEmail').value.trim(),
+      document.getElementById('loginPass').value
+    );
+  } catch (ex) {
+    err.textContent = ex.code === 'auth/wrong-password' ? 'Wrong password.' :
+                      ex.code === 'auth/user-not-found'  ? 'Admin account not found.' :
+                      ex.code === 'auth/invalid-api-key' ? '⚠️ Firebase not configured. Replace placeholder keys in firebase-config.js' :
+                      ex.message;
+    err.style.display = 'block';
+    btn.textContent = '🔐 Login to Admin';
+    btn.disabled = false;
+  }
+});
+
+function showLogin() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminApp').style.display   = 'none';
+}
+
+function showAdmin(user) {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminApp').style.display    = 'flex';
+  const email = user.email || '';
+  document.getElementById('topbarUser').textContent = email;
+  document.getElementById('topbarAvatar').textContent = email[0]?.toUpperCase() || 'A';
+  loadAll();
+  // Seed if needed
+  if (typeof seedIfEmpty === 'function') seedIfEmpty();
+}
+
+async function doLogout() {
+  await auth.signOut();
+  toast('Signed out successfully', 'success');
+}
+
+// ── NAVIGATION ────────────────────────────────
+document.querySelectorAll('.nav-item[data-panel]').forEach(btn => {
+  btn.addEventListener('click', () => switchPanel(btn.dataset.panel));
+});
+
+function switchPanel(name) {
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.nav-item[data-panel="${name}"]`)?.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name)?.classList.add('active');
+  const titles = { dashboard:'Dashboard', hotels:'Hotels', fleet:'Fleet', packages:'Tour Packages', testimonials:'Testimonials', bookings:'Bookings', gallery:'Gallery', settings:'Settings' };
+  document.getElementById('topbarTitle').textContent = titles[name] || name;
+}
+
+// ── LOAD ALL DATA ──────────────────────────────
+async function loadAll() {
+  loadHotels();
+  loadFleet();
+  loadPackages();
+  loadTestimonials();
+  loadBookings();
+  loadGallery();
+  loadDashboardStats();
+}
+
+// ── HOTELS ────────────────────────────────────
+let hotelsData = [];
+
+async function loadHotels() {
+  const snap = await db.collection('hotels').orderBy('order','asc').get().catch(() => db.collection('hotels').get());
+  hotelsData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderHotels(hotelsData);
+  document.getElementById('hotelsBadge').textContent = hotelsData.length;
+  document.getElementById('dHotels').textContent = hotelsData.length;
+}
+
+function renderHotels(data) {
+  const tbody = document.getElementById('hotelsBody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="7" class="no-data">No hotels yet. Add your first hotel!</td></tr>'; return; }
+  tbody.innerHTML = data.map(h => `
+    <tr>
+      <td><img src="${h.image||''}" alt="${h.name}" class="td-img" onerror="this.style.display='none'"></td>
+      <td><strong>${h.name}</strong><br><span style="font-size:11px;color:var(--text-mid)">${h.badge||''}</span></td>
+      <td><span class="stars-display">${'★'.repeat(h.stars||3)}</span></td>
+      <td>${h.location||'—'}</td>
+      <td>${h.price||'—'}</td>
+      <td><span class="badge ${h.active?'badge-green':'badge-red'}">${h.active?'Active':'Hidden'}</span></td>
+      <td><div class="td-actions">
+        <button class="btn btn-edit" onclick="editHotel('${h.id}')">✏️ Edit</button>
+        <button class="btn btn-danger" onclick="confirmDelete('hotels','${h.id}', loadHotels)">🗑️</button>
+      </div></td>
+    </tr>
+  `).join('');
+}
+
+function editHotel(id) {
+  const h = hotelsData.find(x => x.id === id);
+  if (!h) return;
+  document.getElementById('hotelId').value     = id;
+  document.getElementById('hotelName').value   = h.name    || '';
+  document.getElementById('hotelStars').value  = h.stars   || 3;
+  document.getElementById('hotelLocation').value= h.location|| '';
+  document.getElementById('hotelPrice').value  = h.price   || '';
+  document.getElementById('hotelBadge').value  = h.badge   || '';
+  document.getElementById('hotelOrder').value  = h.order   || 10;
+  document.getElementById('hotelDesc').value   = h.description || '';
+  document.getElementById('hotelImg').value    = h.image   || '';
+  document.getElementById('hotelAmenities').value = (h.amenities||[]).join(', ');
+  document.getElementById('hotelActive').checked  = h.active !== false;
+  const prev = document.getElementById('hotelImgPreview');
+  if (h.image) { prev.src = h.image; prev.style.display='block'; }
+  document.getElementById('hotelModalTitle').textContent = 'Edit Hotel';
+  openModal('hotelModal');
+}
+
+async function saveHotel() {
+  const id   = document.getElementById('hotelId').value;
+  const stars = parseInt(document.getElementById('hotelStars').value);
+  const data = {
+    name:        document.getElementById('hotelName').value.trim(),
+    stars,
+    category:    stars + 'star',
+    location:    document.getElementById('hotelLocation').value.trim(),
+    price:       document.getElementById('hotelPrice').value.trim(),
+    badge:       document.getElementById('hotelBadge').value.trim(),
+    order:       parseInt(document.getElementById('hotelOrder').value) || 10,
+    description: document.getElementById('hotelDesc').value.trim(),
+    image:       document.getElementById('hotelImg').value.trim(),
+    amenities:   document.getElementById('hotelAmenities').value.split(',').map(s=>s.trim()).filter(Boolean),
+    active:      document.getElementById('hotelActive').checked,
+  };
+  if (!data.name) { toast('Hotel name is required','error'); return; }
+  try {
+    if (id) { await db.collection('hotels').doc(id).update({ ...data, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }); toast('Hotel updated ✅'); }
+    else     { await db.collection('hotels').add({ ...data, createdAt: firebase.firestore.FieldValue.serverTimestamp() }); toast('Hotel added ✅'); }
+    closeModal('hotelModal'); resetHotelForm(); loadHotels();
+  } catch(e) { toast(e.message,'error'); }
+}
+
+function resetHotelForm() {
+  ['hotelId','hotelName','hotelLocation','hotelPrice','hotelBadge','hotelDesc','hotelImg','hotelAmenities'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('hotelStars').value = 3;
+  document.getElementById('hotelOrder').value = 10;
+  document.getElementById('hotelActive').checked = true;
+  document.getElementById('hotelImgPreview').style.display = 'none';
+  document.getElementById('hotelModalTitle').textContent = 'Add Hotel';
+}
+
+// ── FLEET ─────────────────────────────────────
+let fleetData = [];
+
+async function loadFleet() {
+  const snap = await db.collection('fleet').orderBy('order','asc').get().catch(() => db.collection('fleet').get());
+  fleetData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderFleet(fleetData);
+  document.getElementById('fleetBadge').textContent = fleetData.length;
+  document.getElementById('dFleet').textContent = fleetData.length;
+}
+
+function renderFleet(data) {
+  const tbody = document.getElementById('fleetBody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="6" class="no-data">No vehicles yet.</td></tr>'; return; }
+  tbody.innerHTML = data.map(v => `
+    <tr>
+      <td><img src="${v.image||''}" alt="${v.name}" class="td-img" onerror="this.style.display='none'"></td>
+      <td><strong>${v.name}</strong><br><span style="font-size:11px;color:var(--text-mid)">${(v.features||[]).slice(0,2).join(' · ')}</span></td>
+      <td><span class="badge badge-blue">${v.category||'—'}</span></td>
+      <td>${v.seats||'—'} seats</td>
+      <td><span class="badge ${v.active?'badge-green':'badge-red'}">${v.active?'Active':'Hidden'}</span></td>
+      <td><div class="td-actions">
+        <button class="btn btn-edit" onclick="editFleet('${v.id}')">✏️ Edit</button>
+        <button class="btn btn-danger" onclick="confirmDelete('fleet','${v.id}',loadFleet)">🗑️</button>
+      </div></td>
+    </tr>
+  `).join('');
+}
+
+function editFleet(id) {
+  const v = fleetData.find(x => x.id === id);
+  if (!v) return;
+  document.getElementById('fleetId').value       = id;
+  document.getElementById('fleetName').value     = v.name     || '';
+  document.getElementById('fleetCategory').value = v.category || 'SUV';
+  document.getElementById('fleetSeats').value    = v.seats    || '';
+  document.getElementById('fleetBadge').value    = v.badge    || '';
+  document.getElementById('fleetFeatures').value = (v.features||[]).join(', ');
+  document.getElementById('fleetOrder').value    = v.order    || 10;
+  document.getElementById('fleetDesc').value     = v.description || '';
+  document.getElementById('fleetImg').value      = v.image    || '';
+  document.getElementById('fleetActive').checked = v.active !== false;
+  const prev = document.getElementById('fleetImgPreview');
+  if (v.image) { prev.src = v.image; prev.style.display='block'; }
+  document.getElementById('fleetModalTitle').textContent = 'Edit Vehicle';
+  openModal('fleetModal');
+}
+
+async function saveFleet() {
+  const id = document.getElementById('fleetId').value;
+  const data = {
+    name:        document.getElementById('fleetName').value.trim(),
+    category:    document.getElementById('fleetCategory').value,
+    seats:       document.getElementById('fleetSeats').value.trim(),
+    badge:       document.getElementById('fleetBadge').value.trim(),
+    features:    document.getElementById('fleetFeatures').value.split(',').map(s=>s.trim()).filter(Boolean),
+    order:       parseInt(document.getElementById('fleetOrder').value)||10,
+    description: document.getElementById('fleetDesc').value.trim(),
+    image:       document.getElementById('fleetImg').value.trim(),
+    active:      document.getElementById('fleetActive').checked,
+  };
+  if (!data.name) { toast('Vehicle name is required','error'); return; }
+  try {
+    if (id) { await db.collection('fleet').doc(id).update({ ...data, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }); toast('Vehicle updated ✅'); }
+    else     { await db.collection('fleet').add({ ...data, createdAt: firebase.firestore.FieldValue.serverTimestamp() }); toast('Vehicle added ✅'); }
+    closeModal('fleetModal'); resetFleetForm(); loadFleet();
+  } catch(e) { toast(e.message,'error'); }
+}
+
+function resetFleetForm() {
+  ['fleetId','fleetName','fleetSeats','fleetBadge','fleetFeatures','fleetDesc','fleetImg'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('fleetCategory').value = 'SUV';
+  document.getElementById('fleetOrder').value = 10;
+  document.getElementById('fleetActive').checked = true;
+  document.getElementById('fleetImgPreview').style.display = 'none';
+  document.getElementById('fleetModalTitle').textContent = 'Add Vehicle';
+}
+
+// ── PACKAGES ──────────────────────────────────
+let pkgsData = [];
+
+async function loadPackages() {
+  const snap = await db.collection('packages').get();
+  pkgsData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderPackages(pkgsData);
+  document.getElementById('pkgBadge').textContent = pkgsData.length;
+  document.getElementById('dPkgs').textContent = pkgsData.length;
+}
+
+function renderPackages(data) {
+  const tbody = document.getElementById('pkgsBody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="6" class="no-data">No packages yet.</td></tr>'; return; }
+  tbody.innerHTML = data.map(p => `
+    <tr>
+      <td><img src="${p.image||''}" alt="${p.name}" class="td-img" onerror="this.style.display='none'"></td>
+      <td><strong>${p.name}</strong><br><span style="font-size:11px;color:var(--text-mid)">${p.tagline||''}</span></td>
+      <td>${p.duration||'—'}</td>
+      <td>${p.price||'—'}</td>
+      <td><span class="badge ${p.active?'badge-green':'badge-red'}">${p.active?'Active':'Hidden'}</span></td>
+      <td><div class="td-actions">
+        <button class="btn btn-edit" onclick="editPackage('${p.id}')">✏️ Edit</button>
+        <button class="btn btn-danger" onclick="confirmDelete('packages','${p.id}',loadPackages)">🗑️</button>
+      </div></td>
+    </tr>
+  `).join('');
+}
+
+function editPackage(id) {
+  const p = pkgsData.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('pkgId').value        = id;
+  document.getElementById('pkgName').value      = p.name     || '';
+  document.getElementById('pkgDuration').value  = p.duration || '';
+  document.getElementById('pkgPrice').value     = p.price    || '';
+  document.getElementById('pkgCategory').value  = p.category || 'medium';
+  document.getElementById('pkgTagline').value   = p.tagline  || '';
+  document.getElementById('pkgBadge').value     = p.badge    || '';
+  document.getElementById('pkgHighlights').value= (p.highlights||[]).join('\n');
+  document.getElementById('pkgImg').value       = p.image    || '';
+  document.getElementById('pkgActive').checked  = p.active !== false;
+  const prev = document.getElementById('pkgImgPreview');
+  if (p.image) { prev.src = p.image; prev.style.display='block'; }
+  document.getElementById('pkgModalTitle').textContent = 'Edit Package';
+  openModal('packageModal');
+}
+
+async function savePackage() {
+  const id = document.getElementById('pkgId').value;
+  const data = {
+    name:       document.getElementById('pkgName').value.trim(),
+    duration:   document.getElementById('pkgDuration').value.trim(),
+    price:      document.getElementById('pkgPrice').value.trim(),
+    category:   document.getElementById('pkgCategory').value,
+    tagline:    document.getElementById('pkgTagline').value.trim(),
+    badge:      document.getElementById('pkgBadge').value.trim(),
+    highlights: document.getElementById('pkgHighlights').value.split('\n').map(s=>s.trim()).filter(Boolean),
+    image:      document.getElementById('pkgImg').value.trim(),
+    active:     document.getElementById('pkgActive').checked,
+  };
+  if (!data.name) { toast('Package name is required','error'); return; }
+  try {
+    if (id) { await db.collection('packages').doc(id).update({ ...data, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }); toast('Package updated ✅'); }
+    else     { await db.collection('packages').add({ ...data, createdAt: firebase.firestore.FieldValue.serverTimestamp() }); toast('Package added ✅'); }
+    closeModal('packageModal'); resetPkgForm(); loadPackages();
+  } catch(e) { toast(e.message,'error'); }
+}
+
+function resetPkgForm() {
+  ['pkgId','pkgName','pkgDuration','pkgPrice','pkgTagline','pkgBadge','pkgHighlights','pkgImg'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('pkgCategory').value = 'medium';
+  document.getElementById('pkgActive').checked = true;
+  document.getElementById('pkgImgPreview').style.display = 'none';
+  document.getElementById('pkgModalTitle').textContent = 'Add Tour Package';
+}
+
+// ── TESTIMONIALS ──────────────────────────────
+let testimonialsData = [];
+
+async function loadTestimonials() {
+  const snap = await db.collection('testimonials').get();
+  testimonialsData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderTestimonials(testimonialsData);
+}
+
+function renderTestimonials(data) {
+  const tbody = document.getElementById('testimonialsBody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="6" class="no-data">No testimonials yet.</td></tr>'; return; }
+  tbody.innerHTML = data.map(t => `
+    <tr>
+      <td><strong>${t.name||'—'}</strong></td>
+      <td>${t.location||'—'}</td>
+      <td><span style="color:#F59E0B">${'★'.repeat(parseInt(t.stars)||5)}</span></td>
+      <td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.review||'—'}</td>
+      <td><span class="badge ${t.active?'badge-green':'badge-red'}">${t.active?'Active':'Hidden'}</span></td>
+      <td><div class="td-actions">
+        <button class="btn btn-edit" onclick="editTestimonial('${t.id}')">✏️ Edit</button>
+        <button class="btn btn-danger" onclick="confirmDelete('testimonials','${t.id}',loadTestimonials)">🗑️</button>
+      </div></td>
+    </tr>
+  `).join('');
+}
+
+function editTestimonial(id) {
+  const t = testimonialsData.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById('testId').value       = id;
+  document.getElementById('testName').value     = t.name     || '';
+  document.getElementById('testLocation').value = t.location || '';
+  document.getElementById('testStars').value    = t.stars    || 5;
+  document.getElementById('testInitials').value = t.initials || '';
+  document.getElementById('testReview').value   = t.review   || '';
+  document.getElementById('testActive').checked = t.active !== false;
+  document.getElementById('testModalTitle').textContent = 'Edit Testimonial';
+  openModal('testimonialModal');
+}
+
+async function saveTestimonial() {
+  const id = document.getElementById('testId').value;
+  const data = {
+    name:     document.getElementById('testName').value.trim(),
+    location: document.getElementById('testLocation').value.trim(),
+    stars:    parseInt(document.getElementById('testStars').value),
+    initials: document.getElementById('testInitials').value.trim().toUpperCase(),
+    review:   document.getElementById('testReview').value.trim(),
+    active:   document.getElementById('testActive').checked,
+  };
+  if (!data.name || !data.review) { toast('Name and review are required','error'); return; }
+  try {
+    if (id) { await db.collection('testimonials').doc(id).update({ ...data, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }); toast('Review updated ✅'); }
+    else     { await db.collection('testimonials').add({ ...data, createdAt: firebase.firestore.FieldValue.serverTimestamp() }); toast('Review added ✅'); }
+    closeModal('testimonialModal'); resetTestForm(); loadTestimonials();
+  } catch(e) { toast(e.message,'error'); }
+}
+
+function resetTestForm() {
+  ['testId','testName','testLocation','testInitials','testReview'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('testStars').value = 5;
+  document.getElementById('testActive').checked = true;
+  document.getElementById('testModalTitle').textContent = 'Add Testimonial';
+}
+
+// ── BOOKINGS ──────────────────────────────────
+let bookingsData = [];
+
+async function loadBookings() {
+  const snap = await db.collection('bookings').orderBy('createdAt','desc').get().catch(() => db.collection('bookings').get());
+  bookingsData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderBookings(bookingsData);
+  renderRecentBookings(bookingsData.slice(0,5));
+  const newCount = bookingsData.filter(b => (b.status||'New') === 'New').length;
+  document.getElementById('bookingsBadge').textContent = newCount;
+  document.getElementById('dBookings').textContent = bookingsData.length;
+}
+
+function renderBookings(data) {
+  const tbody = document.getElementById('bookingsBody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="8" class="no-data">No bookings yet.</td></tr>'; return; }
+  tbody.innerHTML = data.map(b => {
+    const ts = b.createdAt?.toDate ? b.createdAt.toDate().toLocaleDateString('en-IN') : '—';
+    const status = b.status || 'New';
+    const statusColors = { New:'badge-blue', Confirmed:'badge-green', Completed:'badge-gold', Cancelled:'badge-red' };
+    return `
+    <tr class="${status==='New'?'booking-new':''}">
+      <td style="font-size:11px;color:var(--text-mid)">${ts}</td>
+      <td><strong>${b.name||'—'}</strong></td>
+      <td><a href="tel:${b.phone}" style="color:var(--gold)">${b.phone||'—'}</a></td>
+      <td style="font-size:12px">${b.vehicle||'—'}</td>
+      <td style="font-size:12px">${b.travelDate||'—'}</td>
+      <td style="font-size:12px">${b.service||'—'}</td>
+      <td><span class="badge ${statusColors[status]||'badge-blue'}">${status}</span></td>
+      <td>
+        <select class="status-select" onchange="updateBookingStatus('${b.id}', this.value)">
+          <option ${status==='New'?'selected':''}>New</option>
+          <option ${status==='Confirmed'?'selected':''}>Confirmed</option>
+          <option ${status==='Completed'?'selected':''}>Completed</option>
+          <option ${status==='Cancelled'?'selected':''}>Cancelled</option>
+        </select>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function renderRecentBookings(data) {
+  const tbody = document.getElementById('recentBookingsBody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="5" class="no-data">No bookings yet.</td></tr>'; return; }
+  tbody.innerHTML = data.map(b => {
+    const status = b.status || 'New';
+    const statusColors = { New:'badge-blue', Confirmed:'badge-green', Completed:'badge-gold', Cancelled:'badge-red' };
+    return `<tr>
+      <td><strong>${b.name||'—'}</strong></td>
+      <td><a href="tel:${b.phone}" style="color:var(--gold)">${b.phone||'—'}</a></td>
+      <td style="font-size:12px">${b.vehicle||'—'}</td>
+      <td style="font-size:12px">${b.travelDate||'—'}</td>
+      <td><span class="badge ${statusColors[status]||'badge-blue'}">${status}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+async function updateBookingStatus(id, status) {
+  try {
+    await db.collection('bookings').doc(id).update({ status, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+    toast(`Status → ${status} ✅`);
+    loadBookings();
+  } catch(e) { toast(e.message,'error'); }
+}
+
+// ── GALLERY ───────────────────────────────────
+let galleryData = [];
+
+async function loadGallery() {
+  const snap = await db.collection('gallery').get();
+  galleryData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderGalleryAdmin(galleryData);
+}
+
+function renderGalleryAdmin(data) {
+  const grid = document.getElementById('galleryAdminGrid');
+  if (!data.length) { grid.innerHTML = '<p style="color:var(--text-mid);font-size:0.9rem">No gallery photos yet. Add some!</p>'; return; }
+  grid.innerHTML = data.map(g => `
+    <div style="position:relative;border-radius:6px;overflow:hidden;border:1px solid var(--border)">
+      <img src="${g.image||''}" alt="${g.label||''}" style="width:100%;height:130px;object-fit:cover">
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);opacity:0;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px" class="gallery-hover">
+        <button class="btn btn-danger btn-sm" onclick="confirmDelete('gallery','${g.id}',loadGallery)">🗑️</button>
+      </div>
+      <div style="padding:8px 10px;background:var(--navy-mid)">
+        <div style="font-size:11px;font-weight:600">${g.label||'Untitled'}</div>
+        <div style="font-size:10px;color:var(--text-mid)">${g.category||''}</div>
+      </div>
+    </div>
+  `).join('');
+  grid.querySelectorAll('div').forEach(card => {
+    const hover = card.querySelector('.gallery-hover');
+    if (hover) {
+      card.addEventListener('mouseenter', () => hover.style.opacity = '1');
+      card.addEventListener('mouseleave', () => hover.style.opacity = '0');
+    }
+  });
+}
+
+async function saveGalleryItem() {
+  const data = {
+    label:    document.getElementById('galleryLabel').value.trim(),
+    category: document.getElementById('galleryCategory').value,
+    image:    document.getElementById('galleryImg').value.trim(),
+  };
+  if (!data.image) { toast('Image URL is required','error'); return; }
+  try {
+    await db.collection('gallery').add({ ...data, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+    toast('Photo added ✅');
+    closeModal('galleryModal');
+    ['galleryLabel','galleryImg'].forEach(id => document.getElementById(id).value='');
+    document.getElementById('galleryImgPreview').style.display='none';
+    loadGallery();
+  } catch(e) { toast(e.message,'error'); }
+}
+
+// ── SETTINGS ──────────────────────────────────
+async function saveSettings() {
+  const data = {
+    name:    document.getElementById('sName').value.trim(),
+    tagline: document.getElementById('sTagline').value.trim(),
+    phone1:  document.getElementById('sPhone1').value.trim(),
+    phone2:  document.getElementById('sPhone2').value.trim(),
+    email:   document.getElementById('sEmail').value.trim(),
+    address: document.getElementById('sAddress').value.trim(),
+  };
+  try {
+    await db.collection('settings').doc('business').set(data, { merge:true });
+    toast('Settings saved ✅');
+  } catch(e) { toast(e.message,'error'); }
+}
+
+async function changePassword() {
+  const np = document.getElementById('newPass').value;
+  const cp = document.getElementById('confirmPass').value;
+  if (!np || np.length < 6) { toast('Password must be at least 6 characters','error'); return; }
+  if (np !== cp) { toast('Passwords do not match','error'); return; }
+  try {
+    await currentUser.updatePassword(np);
+    toast('Password updated ✅');
+    document.getElementById('newPass').value = '';
+    document.getElementById('confirmPass').value = '';
+  } catch(e) { toast(e.message,'error'); }
+}
+
+// ── DASHBOARD STATS ────────────────────────────
+async function loadDashboardStats() {
+  // already loaded by individual loaders
+}
+
+// ── DEFAULT DATA SEEDERS ───────────────────────
+async function seedDefaultHotels() {
+  await seedIfEmpty();
+  loadHotels();
+  toast('Default hotels seeded to Firestore ✅');
+}
+
+async function seedDefaultFleet() {
+  const snap = await db.collection('fleet').limit(1).get();
+  if (!snap.empty) { toast('Fleet already has data','warning'); return; }
+  const vehicles = [
+    { name:'Maruti Swift Dzire', category:'Sedan', seats:'4', badge:'Sedan', features:['Full AC','GPS','Music System'], image:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&q=80', order:1, active:true, description:'Classic choice for solo travellers and couples.' },
+    { name:'Honda Amaze', category:'Sedan', seats:'4', badge:'Sedan', features:['Full AC','Spacious Boot','Quiet Cabin'], image:'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600&q=80', order:2, active:true, description:'Roomier sedan with excellent build quality.' },
+    { name:'Toyota Innova', category:'SUV', seats:'7', badge:'SUV', features:['Dual AC','Mountain Ready','GPS'], image:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&q=80', order:3, active:true, description:'The workhorse of Kashmir tourism.' },
+    { name:'Toyota Innova Crysta', category:'SUV', seats:'7', badge:'Luxury SUV', features:['Leather Seats','Premium Sound','Dual AC'], image:'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&q=80', order:4, active:true, description:'Premium SUV — perfect for honeymooners.' },
+    { name:'Force Urbania', category:'Van', seats:'12-17', badge:'Premium Van', features:['Recliner Seats','Full AC','Ample Luggage'], image:'https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=600&q=80', order:5, active:true, description:'India\'s premium minibus with reclining seats.' },
+    { name:'Tempo Traveller', category:'Van', seats:'12-26', badge:'Minibus', features:['Full AC','Entertainment','Large Capacity'], image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', order:6, active:true, description:'Go-to vehicle for large tourist groups.' },
+  ];
+  const batch = db.batch();
+  vehicles.forEach(v => {
+    const ref = db.collection('fleet').doc();
+    batch.set(ref, { ...v, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+  });
+  await batch.commit();
+  toast('Default fleet seeded ✅');
+  loadFleet();
+}
+
+// ── MODALS ────────────────────────────────────
+function openModal(type) {
+  const map = { hotel:'hotelModal', fleet:'fleetModal', package:'packageModal', testimonial:'testimonialModal', gallery:'galleryModal' };
+  const id = map[type] || type;
+  document.getElementById(id).classList.add('open');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+function confirmDelete(collection, docId, callback) {
+  deleteCallback = async () => {
+    try {
+      await db.collection(collection).doc(docId).delete();
+      toast('Deleted successfully ✅');
+      closeModal('confirmModal');
+      callback();
+    } catch(e) { toast(e.message,'error'); }
+  };
+  document.getElementById('confirmDeleteBtn').onclick = deleteCallback;
+  openModal('confirmModal');
+}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+});
+
+// ── IMAGE PREVIEW ─────────────────────────────
+function previewImg(input, previewId) {
+  const prev = document.getElementById(previewId);
+  if (input.value) {
+    prev.src = input.value;
+    prev.style.display = 'block';
+    prev.onerror = () => { prev.style.display='none'; };
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+// ── TABLE FILTER ──────────────────────────────
+function filterTable(tableId, query) {
+  const rows = document.querySelectorAll('#' + tableId + ' tbody tr');
+  query = query.toLowerCase();
+  rows.forEach(row => {
+    row.style.display = (!query || row.textContent.toLowerCase().includes(query)) ? '' : 'none';
+  });
+}
+
+function filterByCategory(tableId, val, colIndex) {
+  const rows = document.querySelectorAll('#' + tableId + ' tbody tr');
+  rows.forEach(row => {
+    const cell = row.cells[colIndex];
+    row.style.display = (!val || (cell && cell.textContent.trim().toLowerCase().includes(val.toLowerCase()))) ? '' : 'none';
+  });
+}
+
+// ── TOAST ─────────────────────────────────────
+function toast(msg, type = 'success') {
+  const icons = { success:'✅', error:'❌', warning:'⚠️', info:'ℹ️' };
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${icons[type]||'✅'}</span><span>${msg}</span>`;
+  document.getElementById('toastContainer').appendChild(el);
+  setTimeout(() => {
+    el.style.animation = 'slideOut .3s ease forwards';
+    setTimeout(() => el.remove(), 300);
+  }, 3500);
+}
+</script>
+</body>
+</html>
