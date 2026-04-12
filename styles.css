@@ -89,7 +89,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 
 /* Hero */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,0.65) 0%,rgba(10,22,40,0.35) 50%,rgba(10,22,40,0.85) 100%),url('https://images.unsplash.com/photo-1585506942812-e72b29cef752?w=1800&q=85') center/cover no-repeat;transform:scale(1.05);animation:zoomOut 12s ease-out forwards}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,0.65) 0%,rgba(10,22,40,0.35) 50%,rgba(10,22,40,0.85) 100%),url('https://images.unsplash.com/photo-1701957494338-95527b753a7f?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;transform:scale(1.05);animation:zoomOut 12s ease-out forwards}
 @keyframes zoomOut{to{transform:scale(1)}}
 .hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:120px 24px 80px}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,153,58,0.15);border:1px solid rgba(201,153,58,0.4);padding:8px 18px;border-radius:30px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);margin-bottom:28px;animation:fadeInDown 0.8s ease forwards}
