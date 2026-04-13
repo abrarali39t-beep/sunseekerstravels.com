@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block admin or sensitive files (if any later)
+Disallow: /admin/
+Disallow: /firebase-config.js
+
+# Sitemap location
+Sitemap: https://sunseekerstravels.com/sitemap.xml
