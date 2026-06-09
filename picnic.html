@@ -1,95 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sun Seekers Travels</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sun Seekers Travels | Kashmir Tour Packages</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body {margin:0;font-family:'Poppins',sans-serif;background:#f5f5f5;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-header {
-    position:sticky;top:0;
-    background:#111;color:#fff;
-    padding:15px;text-align:center;
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f5f7fb;
+    color:#222;
+    line-height:1.6;
+}
+
+/* HEADER */
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#0b0b0b;
+    color:#fff;
+    padding:18px;
+    text-align:center;
+    font-size:24px;
+    font-weight:700;
+    letter-spacing:1px;
 }
 
 /* HERO */
-.hero {
+.hero{
     background:url('https://images.unsplash.com/photo-1605540436563-5bca919ae766') center/cover no-repeat;
-    height:90vh;display:flex;align-items:center;justify-content:center;
-    color:white;text-align:center;position:relative;
+    height:95vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    color:white;
 }
-.hero::after {
-    content:'';position:absolute;width:100%;height:100%;
-    background:rgba(0,0,0,0.6);
-}
-.hero-content {position:relative;z-index:2;}
 
-.btn {
-    padding:12px 25px;border-radius:30px;
-    text-decoration:none;color:white;
-    background:#0077ff;margin:10px;
+.hero::after{
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.65);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:850px;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:22px;
+    margin-bottom:30px;
+}
+
+/* BUTTONS */
+.btn{
     display:inline-block;
-}
-.whatsapp {background:#25D366;}
-
-/* SECTION */
-.section {padding:60px 20px;text-align:center;}
-.grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-/* CARD */
-.card {
-    background:white;padding:20px;border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    padding:14px 28px;
+    border-radius:35px;
+    text-decoration:none;
+    color:white;
+    background:#0077ff;
+    margin:10px;
     transition:0.3s;
+    font-weight:600;
 }
-.card:hover {transform:translateY(-6px);}
+
+.btn:hover{
+    transform:translateY(-4px);
+    opacity:0.9;
+}
+
+.whatsapp{
+    background:#25D366;
+}
+
+/* SECTIONS */
+.section{
+    padding:70px 20px;
+    text-align:center;
+}
+
+.section h2{
+    font-size:38px;
+    margin-bottom:20px;
+    color:#111;
+}
+
+.section p{
+    max-width:900px;
+    margin:auto;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+    margin-top:40px;
+}
+
+/* CARDS */
+.card{
+    background:white;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    transition:0.3s;
+    font-weight:500;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
 
 /* FORM */
-input, select {
-    width:100%;padding:10px;margin:10px 0;
-    border-radius:8px;border:1px solid #ccc;
+form{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+label{
+    font-weight:600;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    margin:10px 0 20px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:15px;
 }
 
 /* CTA */
-.cta {background:#111;color:white;padding:50px;}
+.cta{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.cta h2{
+    font-size:42px;
+    margin-bottom:20px;
+}
 
 /* FOOTER */
-.footer {background:#000;color:white;padding:20px;text-align:center;}
+.footer{
+    background:#000;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+.hero h1{
+    font-size:36px;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+.section h2{
+    font-size:28px;
+}
+
+}
 </style>
 </head>
 
 <body>
 
-<header>🌍 Sun Seekers Travels</header>
+<!-- HEADER -->
+<header>
+🌍 Sun Seekers Travels
+</header>
 
 <!-- HERO -->
 <section class="hero">
 <div class="hero-content">
-<h1>🎒 School & College Picnic Packages</h1>
-<p>From Classroom to Kashmir – Let the Adventure Begin!</p>
+
+<h1>🎒 Kashmir School & College Tour Packages</h1>
+
+<p>
+From Classroom to Kashmir — Explore Paradise With Safe, Fun & Affordable Trips.
+Discover 100+ Famous & Hidden Destinations Across Kashmir.
+</p>
 
 <a href="tel:+916005868858" class="btn">📞 Call Now</a>
-<a href="https://wa.me/9160058868858" class="btn whatsapp">💬 WhatsApp</a>
+
+<a href="https://wa.me/916005868858" class="btn whatsapp">
+💬 WhatsApp
+</a>
+
 </div>
 </section>
 
 <!-- ABOUT -->
 <section class="section">
-<h2>About Our Trips</h2>
-<p>We organize safe, fun and affordable trips across Kashmir covering 60+ destinations including hidden gems.</p>
+
+<h2>✨ About Our Tours</h2>
+
+<p>
+We organize professional school trips, college tours, honeymoon tours,
+family vacations, trekking adventures and customized Kashmir packages.
+Travel comfortably with experienced guides, transport, hotels and unforgettable memories.
+</p>
+
 </section>
 
 <!-- DESTINATIONS -->
 <section class="section">
-<h2>🌍 Explore 60+ Destinations</h2>
+
+<h2>🌍 Explore Kashmir Destinations</h2>
+
 <div class="grid">
 
 <div class="card">🌸 Gulmarg – Meadow of Flowers</div>
@@ -98,144 +248,226 @@ input, select {
 <div class="card">🚣 Srinagar – City of Lakes</div>
 <div class="card">💎 Dal Lake – Jewel of Srinagar</div>
 
+<div class="card">❄️ Zero Point – Snow Paradise</div>
+<div class="card">🏔️ Thajiwas Glacier – Ice World</div>
+<div class="card">🌿 Doodhpathri – Valley of Milk</div>
+<div class="card">🌲 Yusmarg – Mini Switzerland</div>
+<div class="card">🏞️ Gurez Valley – Hidden Heaven</div>
+
 <div class="card">🎬 Betaab Valley – Bollywood Valley</div>
-<div class="card">🏔️ Aru Valley – Mini Switzerland</div>
-<div class="card">🥛 Doodhpathri – Valley of Milk</div>
-<div class="card">🌿 Yusmarg – Meadow of Jesus</div>
-<div class="card">🌄 Gurez Valley – Hidden Paradise</div>
+<div class="card">🏔️ Aru Valley – Alpine Beauty</div>
+<div class="card">🌄 Chandanwari – Snow Point</div>
+<div class="card">🏞️ Baisaran – Mini Switzerland</div>
+<div class="card">🌊 Lidder River – Crystal Waters</div>
 
-<div class="card">❄️ Sinthan Top – Frozen Gateway</div>
-<div class="card">🌊 Wular Lake – Largest Freshwater Lake</div>
-<div class="card">🏞️ Manasbal Lake – Gem of Lakes</div>
-<div class="card">🌲 Dachigam – Wildlife Paradise</div>
 <div class="card">🌸 Tulip Garden – Flower Paradise</div>
+<div class="card">🌹 Nishat Garden – Garden of Joy</div>
+<div class="card">🌺 Shalimar Garden – Mughal Garden</div>
+<div class="card">💧 Chashme Shahi – Royal Spring</div>
+<div class="card">🏞️ Pari Mahal – Palace of Fairies</div>
 
+<div class="card">🌊 Nigeen Lake – Peaceful Lake</div>
 <div class="card">🏔️ Apharwat Peak – Snow Heaven</div>
-<div class="card">🌄 Thajiwas Glacier – Ice World</div>
-<div class="card">🌿 Verinag – Mughal Spring</div>
-<div class="card">💧 Achabal Garden – Royal Garden</div>
-<div class="card">🌸 Nishat Garden – Garden of Joy</div>
-
-<div class="card">🌹 Shalimar Garden – Garden of Love</div>
-<div class="card">🏞️ Chashme Shahi – Royal Spring</div>
-<div class="card">🏔️ Harmukh Peak – Mountain King</div>
-<div class="card">🌊 Nigeen Lake – Quiet Lake</div>
-<div class="card">🏞️ Tarsar Lake – Alpine Beauty</div>
-
-<div class="card">🌊 Marsar Lake – Hidden Twin</div>
-<div class="card">🌿 Bangus Valley – Secret Meadow</div>
-<div class="card">🏔️ Lolab Valley – Land of Beauty</div>
-<div class="card">🌲 Peer Ki Gali – Scenic Pass</div>
-<div class="card">🏔️ Razdan Pass – Gateway to Gurez</div>
-
 <div class="card">🌄 Drung Waterfall – Frozen Falls</div>
-<div class="card">🌿 Baisaran – Mini Switzerland</div>
+<div class="card">🏞️ Tangmarg – Scenic Town</div>
+<div class="card">🎿 Kongdori – Gondola Point</div>
+
+<div class="card">🌊 Wular Lake – Largest Lake</div>
+<div class="card">🏞️ Manasbal Lake – Gem Lake</div>
+<div class="card">🌲 Dachigam National Park</div>
+<div class="card">🐻 Wildlife Sanctuary Tours</div>
+<div class="card">🏔️ Harmukh Peak – Mountain King</div>
+
+<div class="card">🏕️ Bangus Valley – Secret Meadow</div>
+<div class="card">🌲 Lolab Valley – Land of Beauty</div>
+<div class="card">🏞️ Peer Ki Gali – Scenic Pass</div>
+<div class="card">🏔️ Razdan Pass – Gateway to Gurez</div>
+<div class="card">🌄 Sinthan Top – Frozen Pass</div>
+
+<div class="card">🌿 Verinag – Mughal Spring</div>
+<div class="card">🌺 Achabal Garden – Royal Garden</div>
 <div class="card">🌲 Kokernag – Garden of Springs</div>
-<div class="card">🌊 Sheshnag Lake – Mythical Lake</div>
+<div class="card">🌊 Sheshnag Lake – Mythical Beauty</div>
 <div class="card">🏔️ Kolahoi Glacier – Glacier King</div>
 
-<div class="card">🌿 Chatpal – Hidden Village</div>
-<div class="card">🏞️ Warwan Valley – Untouched Beauty</div>
+<div class="card">🏞️ Chatpal – Hidden Village</div>
 <div class="card">🌄 Margan Top – Adventure Pass</div>
-<div class="card">🌲 Kishtwar – Land of Sapphire</div>
-<div class="card">🏔️ Padder Valley – Emerald Valley</div>
-
-<div class="card">🌿 Suru Valley – Green Wonderland</div>
-<div class="card">🏔️ Zojila Pass – Gateway to Ladakh</div>
-<div class="card">🌄 Amarnath Cave – Holy Shrine</div>
-<div class="card">🌲 Gulmarg Biosphere – Wildlife Heaven</div>
-<div class="card">🏞️ Naranag – Ancient Ruins</div>
-
-<div class="card">🌿 Daksum – Trekking Paradise</div>
+<div class="card">🌿 Warwan Valley – Untouched Nature</div>
 <div class="card">🏔️ Tosamaidan – Big Meadow</div>
-<div class="card">🌄 Aharbal Waterfall – Niagara of Kashmir</div>
-<div class="card">🌲 Kheer Bhawani – Sacred Temple</div>
+<div class="card">🌊 Aharbal Waterfall – Niagara of Kashmir</div>
+
+<div class="card">🕌 Hazratbal Shrine</div>
+<div class="card">🛶 Houseboat Stay – Dal Lake</div>
+<div class="card">🌄 Hari Parbat Fort</div>
+<div class="card">🏛️ Jamia Masjid Srinagar</div>
 <div class="card">🌊 Hokersar Wetland – Bird Paradise</div>
 
-<div class="card">🏞️ Anchar Lake – Calm Waters</div>
-<div class="card">🌄 Khilanmarg – Flower Valley</div>
-<div class="card">🏔️ Lidder Valley – River Paradise</div>
-<div class="card">🌊 Sindh Valley – Flowing Beauty</div>
-
-<div class="card">🌄 Baramulla – Gateway of Kashmir</div>
+<div class="card">🏔️ Zojila Pass – Gateway to Ladakh</div>
+<div class="card">🌿 Suru Valley – Green Wonderland</div>
+<div class="card">🏞️ Kishtwar – Land of Sapphire</div>
+<div class="card">🌄 Padder Valley – Emerald Beauty</div>
 <div class="card">🌲 Kupwara – Crown of Kashmir</div>
+
 <div class="card">🏞️ Anantnag – Land of Springs</div>
+<div class="card">🌄 Baramulla – Gateway of Kashmir</div>
+<div class="card">🌊 Sindh Valley – Flowing Beauty</div>
+<div class="card">🏔️ Amarnath Cave – Holy Shrine</div>
+<div class="card">🌿 Daksum – Trekking Paradise</div>
 
 </div>
 </section>
 
-<!-- BOOKING FORM -->
+<!-- BOOKING -->
 <section class="section">
-<h2>📋 Book Your Trip</h2>
 
-<form style="max-width:600px;margin:auto;text-align:left;">
+<h2>📋 Book Your Kashmir Trip</h2>
+
+<form style="max-width:650px;margin:auto;text-align:left;">
 
 <label>School / College Name</label>
-<input type="text" required>
+<input type="text" placeholder="Enter school or college name" required>
 
-<label>Teacher Name</label>
-<input type="text" required>
+<label>Teacher / Organizer Name</label>
+<input type="text" placeholder="Enter organizer name" required>
 
 <label>Mobile Number</label>
-<input type="tel" required>
+<input type="tel" placeholder="+91 XXXXX XXXXX" required>
 
-<label>Number of Students</label>
-<input type="number" id="students" required>
+<label>Number of Students / Guests</label>
+<input type="number" id="students" placeholder="Enter total people" required>
 
 <label>Select Package</label>
+
 <select id="package">
-<option value="1000">One Day Picnic - ₹1000</option>
-<option value="6000">2-3 Days Trip - ₹6000</option>
-<option value="custom">Custom Tour</option>
+
+<option value="1000">One Day Picnic – ₹1000</option>
+
+<option value="3000">2-3 Days Tour – ₹3000</option>
+
+<option value="5000">4-5 Days Kashmir Tour – ₹5000</option>
+
+<option value="8000">Premium Kashmir Package – ₹8000</option>
+
+<option value="custom">Custom Kashmir Tour</option>
+
 </select>
 
 <label>Select Destination</label>
+
 <select required>
+
 <option>Gulmarg</option>
 <option>Pahalgam</option>
 <option>Sonamarg</option>
-<option>Srinagar</option>
+<option>Zero Point</option>
 <option>Dal Lake</option>
 <option>Gurez Valley</option>
 <option>Doodhpathri</option>
 <option>Yusmarg</option>
+<option>Tulip Garden</option>
+<option>Betaab Valley</option>
+<option>Drung Waterfall</option>
+<option>Lolab Valley</option>
+<option>Peer Ki Gali</option>
+<option>Razdan Pass</option>
+<option>Sinthan Top</option>
+<option>Sheshnag Lake – Mythical Beauty</option>
+<option>Tosamaidan – Big Meadow</option>
+<option>Warwan Valley – Untouched Nature</option>
+<option>Daksum – Trekking Paradise</option>
 </select>
 
-<button type="button" class="btn" onclick="calculatePrice()">Calculate Price</button>
+<button type="button" class="btn" onclick="calculatePrice()">
+💰 Calculate Price
+</button>
 
-<h3 id="total"></h3>
+<h3 id="total" style="margin-top:20px;color:#0077ff;"></h3>
 
-<button class="btn whatsapp">Submit Booking</button>
+<button class="btn whatsapp">
+✅ Submit Booking
+</button>
 
 </form>
 </section>
 
+<!-- SERVICES -->
+<section class="section">
+
+<h2>🚐 Our Services</h2>
+
+<div class="grid">
+
+<div class="card">🚍 Luxury Transport</div>
+<div class="card">🏨 Hotel Booking</div>
+<div class="card">🛶 Houseboat Packages</div>
+<div class="card">🍽️ Food & Dining</div>
+<div class="card">📸 Photography Tours</div>
+<div class="card">🥾 Trekking Adventures</div>
+<div class="card">🎓 School Picnic Tours</div>
+<div class="card">❤️ Honeymoon Packages</div>
+
+</div>
+
+</section>
+
 <!-- CTA -->
 <section class="cta">
-<h2>🎉 Special Discount for Groups</h2>
-<a href="tel:+916005868858" class="btn">Call Now</a>
-<a href="https://wa.me/9160058688588" class="btn whatsapp">WhatsApp</a>
+
+<h2>🎉 Special Discount for Groups & Colleges</h2>
+
+<p style="margin-bottom:25px;">
+Book early and get exciting offers on Kashmir tour packages.
+</p>
+
+<a href="tel:+916005868858" class="btn">
+📞 Call Now
+</a>
+
+<a href="https://wa.me/916005868858" class="btn whatsapp">
+💬 WhatsApp
+</a>
+
 </section>
 
 <!-- FOOTER -->
 <div class="footer">
-<p>📍 Kashmir | ☎ +91 6005868858</p>
-<p>© 2025 Sun Seekers Travels</p>
+
+<p>📍 Kashmir, India | ☎ +91 6005868858</p>
+
+<p>© 2026 Sun Seekers Travels. All Rights Reserved.</p>
+
 </div>
 
+<!-- JAVASCRIPT -->
 <script>
-function calculatePrice() {
+
+function calculatePrice(){
+
 let students = document.getElementById("students").value;
+
 let price = document.getElementById("package").value;
 
+if(students === ""){
+    alert("Please enter number of students");
+    return;
+}
+
 if(price === "custom"){
-document.getElementById("total").innerHTML = "Contact us for custom pricing";
+
+document.getElementById("total").innerHTML =
+"📞 Contact us for custom package pricing.";
+
 return;
+
 }
 
 let total = students * price;
-document.getElementById("total").innerHTML = "Total Price: ₹" + total;
+
+document.getElementById("total").innerHTML =
+"🎉 Total Package Price: ₹" + total;
+
 }
+
 </script>
 
 </body>
